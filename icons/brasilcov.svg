@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="256.0px"
+   height="256.0px"
+   viewBox="0 0 256.0 256.0"
+   version="1.1"
+   id="SVGRoot"
+   sodipodi:docname="desenho.svg"
+   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview839"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     showgrid="true"
+     inkscape:zoom="1.8992985"
+     inkscape:cx="89.243474"
+     inkscape:cy="142.15775"
+     inkscape:window-width="1360"
+     inkscape:window-height="699"
+     inkscape:window-x="0"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer4">
+    <inkscape:grid
+       type="xygrid"
+       id="grid845" />
+  </sodipodi:namedview>
+  <defs
+     id="defs834">
+    <rect
+       x="80.254094"
+       y="98.728402"
+       width="103.90833"
+       height="63.878066"
+       id="rect2064" />
+  </defs>
+  <g
+     inkscape:label="virus-corner"
+     inkscape:groupmode="layer"
+     id="layer1"
+     sodipodi:insensitive="true">
+    <circle
+       style="fill:#00dc00;fill-opacity:1;stroke:#023900;stroke-width:5.564;stroke-dasharray:none;stroke-opacity:1"
+       id="circle1780"
+       cx="128"
+       cy="128"
+       r="78"
+       inkscape:label="virus-corner-circle" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="left-corona"
+     transform="translate(0,7.8965988)"
+     sodipodi:insensitive="true">
+    <rect
+       style="fill:#00dc00;fill-opacity:1;stroke:#023900;stroke-width:5.564;stroke-dasharray:none;stroke-opacity:1"
+       id="rect1776"
+       width="34.068298"
+       height="12.136832"
+       x="24.726624"
+       y="113.86557"
+       inkscape:label="left-corona-rect" />
+    <circle
+       style="fill:#00dc00;fill-opacity:1;stroke:#023900;stroke-width:5.564;stroke-dasharray:none;stroke-opacity:1"
+       id="path1891"
+       cx="19.21233"
+       cy="120.1034"
+       r="12.5"
+       inkscape:label="left-corona-circle" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2-6"
+     inkscape:label="right-corona"
+     transform="matrix(-1,0,0,1,255.99992,7.8965988)"
+     sodipodi:insensitive="true">
+    <rect
+       style="fill:#00dc00;fill-opacity:1;stroke:#023900;stroke-width:5.564;stroke-dasharray:none;stroke-opacity:1"
+       id="rect1776-7"
+       width="34.068298"
+       height="12.136832"
+       x="24.726624"
+       y="113.86557"
+       inkscape:label="right-corona-rect" />
+    <circle
+       style="fill:#00dc00;fill-opacity:1;stroke:#023900;stroke-width:5.564;stroke-dasharray:none;stroke-opacity:1"
+       id="path1891-5"
+       cx="19.21233"
+       cy="120.1034"
+       r="12.5"
+       inkscape:label="right-corona-circle" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="g1989"
+     inkscape:label="top-right-corona"
+     transform="matrix(-0.70710678,0.70710678,0.70710678,0.70710678,131.19412,-44.92618)">
+    <rect
+       style="fill:#00dc00;fill-opacity:1;stroke:#023900;stroke-width:5.564;stroke-dasharray:none;stroke-opacity:1"
+       id="rect1985"
+       width="34.068298"
+       height="12.136832"
+       x="24.726624"
+       y="113.86557"
+       inkscape:label="top-right-corona-rect" />
+    <circle
+       style="fill:#00dc00;fill-opacity:1;stroke:#023900;stroke-width:5.564;stroke-dasharray:none;stroke-opacity:1"
+       id="circle1987"
+       cx="19.21233"
+       cy="120.1034"
+       r="12.5"
+       inkscape:label="top-right-corona-circle" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="g2001"
+     inkscape:label="bot-right-corona"
+     transform="matrix(-0.70710678,-0.70710678,-0.70710678,0.70710678,300.92618,131.19412)">
+    <rect
+       style="fill:#00dc00;fill-opacity:1;stroke:#023900;stroke-width:5.564;stroke-dasharray:none;stroke-opacity:1"
+       id="rect1997"
+       width="34.068298"
+       height="12.136832"
+       x="24.726624"
+       y="113.86557"
+       inkscape:label="bot-right-corona-rect" />
+    <circle
+       style="fill:#00dc00;fill-opacity:1;stroke:#023900;stroke-width:5.564;stroke-dasharray:none;stroke-opacity:1"
+       id="circle1999"
+       cx="19.21233"
+       cy="120.1034"
+       r="12.5"
+       inkscape:label="bot-right-corona-circle" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="g2007"
+     inkscape:label="top-left-corona"
+     transform="matrix(0.70710678,0.70710678,0.70710678,-0.70710678,-44.92618,124.80588)">
+    <rect
+       style="fill:#00dc00;fill-opacity:1;stroke:#023900;stroke-width:5.564;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2003"
+       width="34.068298"
+       height="12.136832"
+       x="24.726624"
+       y="113.86557"
+       inkscape:label="top-left-corona-rect" />
+    <circle
+       style="fill:#00dc00;fill-opacity:1;stroke:#023900;stroke-width:5.564;stroke-dasharray:none;stroke-opacity:1"
+       id="circle2005"
+       cx="19.21233"
+       cy="120.1034"
+       r="12.5"
+       inkscape:label="top-left-corona-circle" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="g1995"
+     inkscape:label="bot-left-corona"
+     transform="matrix(0.70710678,-0.70710678,-0.70710678,-0.70710678,125.97571,299.75635)"
+     sodipodi:insensitive="true">
+    <rect
+       style="fill:#00dc00;fill-opacity:1;stroke:#023900;stroke-width:5.564;stroke-dasharray:none;stroke-opacity:1"
+       id="rect1991"
+       width="34.068298"
+       height="12.136832"
+       x="24.726624"
+       y="113.86557"
+       inkscape:label="bot-left-corona-rect" />
+    <circle
+       style="fill:#00dc00;fill-opacity:1;stroke:#023900;stroke-width:5.564;stroke-dasharray:none;stroke-opacity:1"
+       id="circle1993"
+       cx="19.21233"
+       cy="120.1034"
+       r="12.5"
+       inkscape:label="bot-left-corona-circle" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="g1983"
+     inkscape:label="bot-corona"
+     transform="matrix(0,-1,-1,0,248.10341,255.99963)"
+     sodipodi:insensitive="true">
+    <rect
+       style="fill:#00dc00;fill-opacity:1;stroke:#023900;stroke-width:5.564;stroke-dasharray:none;stroke-opacity:1"
+       id="rect1979"
+       width="34.068298"
+       height="12.136832"
+       x="24.726624"
+       y="113.86557"
+       inkscape:label="bot-corona-rect" />
+    <circle
+       style="fill:#00dc00;fill-opacity:1;stroke:#023900;stroke-width:5.564;stroke-dasharray:none;stroke-opacity:1"
+       id="circle1981"
+       cx="19.21233"
+       cy="120.1034"
+       r="12.5"
+       inkscape:label="bot-corona-circle" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="g1941"
+     inkscape:label="top-corona"
+     transform="matrix(0,1,1,0,7.8965988,-1.7030392)"
+     sodipodi:insensitive="true">
+    <rect
+       style="fill:#00dc00;fill-opacity:1;stroke:#023900;stroke-width:5.564;stroke-dasharray:none;stroke-opacity:1"
+       id="rect1937"
+       width="34.068298"
+       height="12.136832"
+       x="24.726624"
+       y="113.86557"
+       inkscape:label="top-corona-rect" />
+    <circle
+       style="fill:#00dc00;fill-opacity:1;stroke:#023900;stroke-width:5.564;stroke-dasharray:none;stroke-opacity:1"
+       id="circle1939"
+       cx="19.21233"
+       cy="120.1034"
+       r="12.5"
+       inkscape:label="top-corona-circle" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="virus-core"
+     sodipodi:insensitive="true">
+    <circle
+       style="fill:#00dc00;fill-opacity:1;stroke:none;stroke-width:5.37137;stroke-dasharray:none;stroke-opacity:1"
+       id="path904"
+       cx="127.99999"
+       cy="128"
+       inkscape:label="virus-core-circle"
+       r="75.300003" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="text">
+    <text
+       xml:space="preserve"
+       style="font-size:69.3333px;line-height:0;fill:#023900;fill-opacity:1;stroke:none;stroke-width:32.6583;stroke-dasharray:none;stroke-opacity:1"
+       x="112.86521"
+       y="120.98444"
+       id="text2070"
+       transform="scale(0.76248655,1.3114985)"><tspan
+         sodipodi:role="line"
+         id="tspan2068"
+         x="112.86521"
+         y="120.98444"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:69.3333px;font-family:Kanit;-inkscape-font-specification:Kanit;fill:#023900;fill-opacity:1;stroke:none;stroke-width:32.6583">BR</tspan></text>
+  </g>
+</svg>
