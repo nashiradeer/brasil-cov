@@ -1,6 +1,8 @@
 set(brasilcov_SOURCES
     main.cpp
     mainwindow.cpp
+    aboutwindow.cpp
+    optionswindow.cpp
     statsmenu.cpp
     statsitem.cpp
     ../resources.qrc

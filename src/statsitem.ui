@@ -51,6 +51,9 @@ QWidget#deaths {
 	border: 1px solid palette(dark);
 }</string>
   </property>
+  <property name="locale">
+   <locale language="English" country="UnitedStates"/>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
     <number>0</number>

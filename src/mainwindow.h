@@ -4,6 +4,8 @@
 #include "ui_mainwindow.h"
 #include <QMainWindow>
 #include "statsmenu.h"
+#include "optionswindow.h"
+#include "aboutwindow.h"
 
 namespace BrasilCoV
 {
@@ -18,9 +20,16 @@ public:
     explicit MainWindow(QWidget *parent = nullptr, Qt::WindowFlags flags = Qt::WindowFlags());
     virtual ~MainWindow();
 
+private slots:
+    void openOptions();
+    void openAbout();
+    void closeWindow();
+
 private:
     Ui::MainWindow *ui;
     StatsMenu *statsmenu;
+    OptionsWindow *options;
+    AboutWindow *about;
 };
 
 #endif
