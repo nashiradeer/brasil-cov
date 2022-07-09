@@ -1,5 +1,6 @@
 set(brasilcov_SOURCES
     main.cpp
+    core.cpp
     mainwindow.cpp
     aboutwindow.cpp
     optionswindow.cpp
@@ -13,4 +14,5 @@ add_executable(brasilcov ${brasilcov_SOURCES})
 target_link_libraries(brasilcov
     Qt5::Core
     Qt5::Widgets
+    Qt5::Network
 )

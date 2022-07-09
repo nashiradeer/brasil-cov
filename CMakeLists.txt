@@ -11,6 +11,7 @@ set(CMAKE_AUTOUIC ON)
 find_package(Qt5 REQUIRED COMPONENTS
     Core
     Widgets
+    Network
 )
 
 add_subdirectory(src)
