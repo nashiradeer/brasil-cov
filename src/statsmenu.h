@@ -3,6 +3,7 @@
 
 #include "ui_statsmenu.h"
 #include <QWidget>
+#include "core.h"
 #include "statsitem.h"
 
 namespace BrasilCoV
@@ -17,6 +18,10 @@ class StatsMenu : public QWidget
 public:
     explicit StatsMenu(QWidget *parent = nullptr);
     virtual ~StatsMenu();
+    bool brazilSelected();
+
+public slots:
+    void data(CoVDataManager *mgr);
 
 private:
     Ui::StatsMenu *ui;

@@ -4,6 +4,7 @@
 #include <QString>
 #include <QVector>
 #include <QMutex>
+#include <QThread>
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QJsonDocument>
@@ -40,7 +41,7 @@ class CoVDataManager : public QObject
     Q_OBJECT
 
 public:
-    explicit CoVDataManager();
+    explicit CoVDataManager(QObject *parent = nullptr);
     virtual ~CoVDataManager();
     void update(QJsonArray json);
     int size();
@@ -59,17 +60,37 @@ class CoVNetworkManager : public QObject
     Q_OBJECT
 
 public:
-    explicit CoVNetworkManager(CoVDataManager *datamanager);
+    explicit CoVNetworkManager(CoVDataManager *datamanager, QObject *parent = nullptr);
     virtual ~CoVNetworkManager();
     bool fetchCountries();
     bool fetchStates();
     bool busy();
 
+private slots:
+    void replyHandler();
+
 private:
+    QMutex *mutex;
     CoVDataManager *data;
     QNetworkAccessManager *networkmanager;
     QNetworkReply *reply;
-    void replyHandler();
+};
+
+class CoVNetworkThread : public QThread
+{
+    Q_OBJECT
+
+public:
+    explicit CoVNetworkThread(CoVNetworkManager *manager, bool brazilOnly, QObject *parent = nullptr);
+    bool brazil();
+    bool success();
+    void setBrazil(bool brazilOnly);
+    void run() override;
+
+private:
+    CoVNetworkManager *mgr;
+    bool brOnly;
+    bool result;
 };
 
 #endif

@@ -56,7 +56,7 @@ quint32 CoVDataItem::deaths()
     return _deaths;
 }
 
-CoVDataManager::CoVDataManager()
+CoVDataManager::CoVDataManager(QObject *parent) : QObject(parent)
 {
     mutex = new QMutex();
     data = new QVector<CoVDataItem>();
@@ -91,13 +91,14 @@ CoVDataItem CoVDataManager::operator[](int i)
     return data->operator[](i);
 }
 
-CoVNetworkManager::CoVNetworkManager(CoVDataManager *datamanager)
+CoVNetworkManager::CoVNetworkManager(CoVDataManager *datamanager, QObject *parent) : QObject(parent)
 {
     reply = nullptr;
 
     data = datamanager;
 
     networkmanager = new QNetworkAccessManager(this);
+    mutex = new QMutex();
 }
 
 CoVNetworkManager::~CoVNetworkManager()
@@ -105,32 +106,38 @@ CoVNetworkManager::~CoVNetworkManager()
     delete networkmanager;
     if (reply != nullptr)
         delete reply;
+    delete mutex;
 }
 
 bool CoVNetworkManager::busy()
 {
+    QMutexLocker lock(mutex);
     return reply == nullptr;
 }
 
 bool CoVNetworkManager::fetchCountries()
 {
-    if (busy())
+    QMutexLocker lock(mutex);
+    if (reply != nullptr)
         return false;
     reply = networkmanager->get(QNetworkRequest(QUrl("https://covid19-brazil-api.now.sh/api/report/v1/countries")));
+    connect(reply, &QIODevice::readyRead, this, &CoVNetworkManager::replyHandler);
     return true;
 }
 
 bool CoVNetworkManager::fetchStates()
 {
-    if (busy())
+    QMutexLocker lock(mutex);
+    if (reply != nullptr)
         return false;
-    reply = networkmanager->get(QNetworkRequest(QUrl("https://covid19-brazil-api.now.sh/api/report/v1/countries")));
-    connect(reply, &QNetworkReply::finished, this, &CoVNetworkManager::replyHandler);
+    reply = networkmanager->get(QNetworkRequest(QUrl("https://covid19-brazil-api.now.sh/api/report/v1")));
+    connect(reply, &QIODevice::readyRead, this, &CoVNetworkManager::replyHandler);
     return true;
 }
 
 void CoVNetworkManager::replyHandler()
 {
+    QMutexLocker lock(mutex);
     if (reply->isReadable() && reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() == 200)
     {
         QByteArray response = reply->readAll();
@@ -138,6 +145,36 @@ void CoVNetworkManager::replyHandler()
         data->update(json["data"].toArray());
     }
 
-    delete reply;
+    reply->deleteLater();
     reply = nullptr;
+}
+
+CoVNetworkThread::CoVNetworkThread(CoVNetworkManager *manager, bool brazilOnly, QObject *parent) : QThread(parent)
+{
+    mgr = manager;
+    brOnly = brazilOnly;
+}
+
+bool CoVNetworkThread::brazil()
+{
+    return brOnly;
+}
+
+bool CoVNetworkThread::success()
+{
+    return result;
+}
+
+void CoVNetworkThread::setBrazil(bool brazilOnly)
+{
+    if (!isRunning())
+        brOnly = brazilOnly;
+}
+
+void CoVNetworkThread::run()
+{
+    if (brOnly)
+        result = mgr->fetchStates();
+    else
+        result = mgr->fetchCountries();
 }
