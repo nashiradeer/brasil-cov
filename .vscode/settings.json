@@ -10,6 +10,9 @@
         "algorithm": "cpp",
         "tuple": "cpp",
         "utility": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "atomic": "cpp",
+        "condition_variable": "cpp",
+        "future": "cpp"
     }
 }
