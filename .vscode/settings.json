@@ -1,0 +1,15 @@
+{
+    "files.associations": {
+        "qvector": "cpp",
+        "array": "cpp",
+        "chrono": "cpp",
+        "deque": "cpp",
+        "string": "cpp",
+        "vector": "cpp",
+        "string_view": "cpp",
+        "algorithm": "cpp",
+        "tuple": "cpp",
+        "utility": "cpp",
+        "variant": "cpp"
+    }
+}
