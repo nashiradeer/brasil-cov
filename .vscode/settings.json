@@ -13,6 +13,7 @@
         "variant": "cpp",
         "atomic": "cpp",
         "condition_variable": "cpp",
-        "future": "cpp"
+        "future": "cpp",
+        "new": "cpp"
     }
 }
