@@ -3,6 +3,9 @@
 StatsMenu::StatsMenu(QWidget *parent) : QWidget(parent), ui(new Ui::StatsMenu)
 {
     ui->setupUi(this);
+
+    connect(ui->brazilRadio, &QRadioButton::clicked, this, &StatsMenu::triggerFetch);
+    connect(ui->allCountriesRadio, &QRadioButton::clicked, this, &StatsMenu::triggerFetch);
 }
 
 bool StatsMenu::brazilSelected()
@@ -24,6 +27,11 @@ void StatsMenu::data(QVector<BrCoVDataItem> *data)
         BrCoVDataItem datai = data->operator[](i);
         ui->listArea->addWidget(new StatsItem(datai.name(), datai.suspects(), datai.cases(), datai.deaths()));
     }
+}
+
+void StatsMenu::triggerFetch()
+{
+    emit fetch();
 }
 
 StatsMenu::~StatsMenu()

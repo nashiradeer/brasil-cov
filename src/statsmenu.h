@@ -20,8 +20,14 @@ public:
     virtual ~StatsMenu();
     bool brazilSelected();
 
+signals:
+    void fetch();
+
 public slots:
     void data(QVector<BrCoVDataItem> *data);
+
+private slots:
+    void triggerFetch();
 
 private:
     Ui::StatsMenu *ui;

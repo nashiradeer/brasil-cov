@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow(par
     datamgr = new BrCoVDataManager(this);
 
     connect(datamgr, &BrCoVDataManager::parsed, statsmenu, &StatsMenu::data);
+    connect(statsmenu, &StatsMenu::fetch, this, &MainWindow::reloadRequested);
 
     if (statsmenu->brazilSelected())
     {
