@@ -16,7 +16,7 @@ class StatsMenu : public QWidget
     Q_OBJECT
 
 public:
-    explicit StatsMenu(QWidget *parent = nullptr);
+    explicit StatsMenu(BrCoVDataManager *datamgr, QWidget *parent = nullptr);
     virtual ~StatsMenu();
     bool brazilSelected();
 
@@ -28,9 +28,12 @@ public slots:
 
 private slots:
     void triggerFetch();
+    void search(QString text);
 
 private:
+    void updateUi(QVector<BrCoVDataItem> *data, QString search = "");
     Ui::StatsMenu *ui;
+    BrCoVDataManager *dmgr;
 };
 
 #endif

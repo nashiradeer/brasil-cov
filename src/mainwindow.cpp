@@ -13,11 +13,11 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow(par
     connect(ui->actionOptions, &QAction::triggered, this, &MainWindow::openOptions);
     connect(ui->actionAbout, &QAction::triggered, this, &MainWindow::openAbout);
 
-    statsmenu = new StatsMenu();
+    datamgr = new BrCoVDataManager(this);
+
+    statsmenu = new StatsMenu(datamgr);
 
     ui->main->addWidget(statsmenu);
-
-    datamgr = new BrCoVDataManager(this);
 
     connect(datamgr, &BrCoVDataManager::parsed, statsmenu, &StatsMenu::data);
     connect(statsmenu, &StatsMenu::fetch, this, &MainWindow::reloadRequested);
