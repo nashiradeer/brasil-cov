@@ -4,11 +4,6 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow(par
 {
     ui->setupUi(this);
 
-    datamgr = new CoVDataManager(this);
-    connect(datamgr, &CoVDataManager::updated, this, &MainWindow::dataReceived);
-
-    netmgr = new CoVNetworkManager(datamgr, this);
-
     connect(ui->actionExit, &QAction::triggered, this, &MainWindow::closeWindow);
     connect(ui->actionReload, &QAction::triggered, this, &MainWindow::reloadRequested);
 
@@ -19,20 +14,25 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow(par
     connect(ui->actionAbout, &QAction::triggered, this, &MainWindow::openAbout);
 
     statsmenu = new StatsMenu();
-    connect(this, &MainWindow::data, statsmenu, &StatsMenu::data);
-
-    netthread = new CoVNetworkThread(netmgr, statsmenu->brazilSelected(), this);
-    netthread->start();
 
     ui->main->addWidget(statsmenu);
+
+    datamgr = new BrCoVDataManager(this);
+
+    connect(datamgr, &BrCoVDataManager::parsed, statsmenu, &StatsMenu::data);
+
+    if (statsmenu->brazilSelected())
+    {
+        datamgr->fetchStates();
+    }
+    else
+    {
+        datamgr->fetchCountries();
+    }
 }
 
 MainWindow::~MainWindow()
 {
-    netthread->quit();
-    netthread->wait();
-    delete netthread;
-    delete netmgr;
     delete datamgr;
     delete options;
     delete about;
@@ -42,13 +42,14 @@ MainWindow::~MainWindow()
 
 void MainWindow::reloadRequested()
 {
-    netthread->setBrazil(statsmenu->brazilSelected());
-    netthread->start();
-}
-
-void MainWindow::dataReceived()
-{
-    emit data(datamgr);
+    if (statsmenu->brazilSelected())
+    {
+        datamgr->fetchStates();
+    }
+    else
+    {
+        datamgr->fetchCountries();
+    }
 }
 
 void MainWindow::openOptions()

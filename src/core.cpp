@@ -1,34 +1,6 @@
 #include "core.h"
 
-CoVDataItem CoVDataItem::fromJson(QJsonObject object)
-{
-    QString name;
-    quint32 cases;
-    quint32 suspects;
-    quint32 deaths;
-    if (object.contains(QString("uf")))
-    {
-        name = QString(object["uf"].toString());
-        if (object.contains(QString("state")))
-        {
-            name += " (" + object["state"].toString() + ")";
-        }
-
-        cases = object["cases"].toInt();
-        suspects = object["suspects"].toInt();
-    }
-    else
-    {
-        name = QString(object["country"].toString());
-        cases = object["confirmed"].toInt();
-        suspects = object["cases"].toInt();
-    }
-    deaths = object["deaths"].toInt();
-
-    return CoVDataItem(name, suspects, cases, deaths);
-}
-
-CoVDataItem::CoVDataItem(QString name, quint32 suspects, quint32 cases, quint32 deaths)
+BrCoVDataItem::BrCoVDataItem(QString name, quint32 suspects, quint32 cases, quint32 deaths)
 {
     _name = name;
     _suspect = suspects;
@@ -36,145 +8,168 @@ CoVDataItem::CoVDataItem(QString name, quint32 suspects, quint32 cases, quint32 
     _deaths = deaths;
 }
 
-QString CoVDataItem::name()
+QString BrCoVDataItem::name()
 {
     return _name;
 }
 
-quint32 CoVDataItem::cases()
+quint32 BrCoVDataItem::cases()
 {
     return _cases;
 }
 
-quint32 CoVDataItem::suspects()
+quint32 BrCoVDataItem::suspects()
 {
     return _suspect;
 }
 
-quint32 CoVDataItem::deaths()
+quint32 BrCoVDataItem::deaths()
 {
     return _deaths;
 }
 
-CoVDataManager::CoVDataManager(QObject *parent) : QObject(parent)
+BrCoVDataParser::BrCoVDataParser(QObject *parent) : QThread(parent)
 {
     mutex = new QMutex();
-    data = new QVector<CoVDataItem>();
+    dataparsed = new QVector<BrCoVDataItem>();
+    rawdata = nullptr;
 }
 
-CoVDataManager::~CoVDataManager()
+BrCoVDataParser::~BrCoVDataParser()
 {
-    delete data;
+    if (rawdata != nullptr)
+        delete rawdata;
+    delete dataparsed;
     delete mutex;
 }
 
-void CoVDataManager::update(QJsonArray json)
+QVector<BrCoVDataItem> BrCoVDataParser::data()
 {
-    QMutexLocker locker(mutex);
-    data->clear();
-    for (int i = 0; i < json.count(); i++)
+    QMutexLocker lock(mutex);
+    QVector<BrCoVDataItem> r(*dataparsed);
+    return r;
+}
+
+bool BrCoVDataParser::parse(QByteArray arr)
+{
+    if (isRunning())
+        return false;
+
+    QMutexLocker lock(mutex);
+    rawdata = new QByteArray(arr);
+    start();
+    return true;
+}
+
+void BrCoVDataParser::run()
+{
+    QMutexLocker lock(mutex);
+    dataparsed->clear();
+    QJsonDocument json = QJsonDocument::fromJson(*rawdata);
+    QJsonArray arr = json["data"].toArray();
+    for (int i = 0; i < arr.count(); i++)
     {
-        data->append(CoVDataItem::fromJson(json[i].toObject()));
+        QJsonObject object = arr[i].toObject();
+        QString name;
+        quint32 cases;
+        quint32 suspects;
+        quint32 deaths;
+        if (object.contains(QString("state")))
+        {
+            name = QString(object["state"].toString());
+            if (object.contains(QString("uf")))
+            {
+                name += " (" + object["uf"].toString() + ")";
+            }
+
+            cases = object["cases"].toInt();
+            suspects = object["suspects"].toInt();
+        }
+        else
+        {
+            name = QString(object["country"].toString());
+            cases = object["confirmed"].toInt();
+            suspects = object["cases"].toInt();
+        }
+        deaths = object["deaths"].toInt();
+        dataparsed->append(BrCoVDataItem(name, suspects, cases, deaths));
     }
-    emit updated();
+    emit parsed(dataparsed);
 }
 
-int CoVDataManager::size()
+BrCoVDataManager::BrCoVDataManager(QObject *parent) : QObject(parent)
 {
-    QMutexLocker locker(mutex);
-    return data->size();
+    netmgr = new QNetworkAccessManager(this);
+    connect(netmgr, &QNetworkAccessManager::finished, this, &BrCoVDataManager::handlerReply);
+    parser = new BrCoVDataParser(this);
+    connect(parser, &BrCoVDataParser::parsed, this, &BrCoVDataManager::handlerParser);
+    waitingdata = false;
 }
 
-CoVDataItem CoVDataManager::operator[](int i)
+BrCoVDataManager::~BrCoVDataManager()
 {
-    QMutexLocker locker(mutex);
-    return data->operator[](i);
+    delete parser;
+    delete netmgr;
 }
 
-CoVNetworkManager::CoVNetworkManager(CoVDataManager *datamanager, QObject *parent) : QObject(parent)
+bool BrCoVDataManager::downloading()
 {
-    reply = nullptr;
-
-    data = datamanager;
-
-    networkmanager = new QNetworkAccessManager(this);
-    mutex = new QMutex();
+    return waitingdata;
 }
 
-CoVNetworkManager::~CoVNetworkManager()
+bool BrCoVDataManager::parsing()
 {
-    delete networkmanager;
-    if (reply != nullptr)
-        delete reply;
-    delete mutex;
+    return parser->isRunning();
 }
 
-bool CoVNetworkManager::busy()
+bool BrCoVDataManager::busy()
 {
-    QMutexLocker lock(mutex);
-    return reply == nullptr;
+    return downloading() || parsing();
 }
 
-bool CoVNetworkManager::fetchCountries()
+bool BrCoVDataManager::fetchCountries()
 {
-    QMutexLocker lock(mutex);
-    if (reply != nullptr)
+    return fetch(QUrl("https://covid19-brazil-api.now.sh/api/report/v1/countries"));
+}
+
+bool BrCoVDataManager::fetchStates()
+{
+    return fetch(QUrl("https://covid19-brazil-api.now.sh/api/report/v1"));
+}
+
+bool BrCoVDataManager::fetch(QUrl url)
+{
+    if (busy())
         return false;
-    reply = networkmanager->get(QNetworkRequest(QUrl("https://covid19-brazil-api.now.sh/api/report/v1/countries")));
-    connect(reply, &QIODevice::readyRead, this, &CoVNetworkManager::replyHandler);
+    waitingdata = true;
+    QNetworkRequest request(url);
+    request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, true);
+    netmgr->get(request);
     return true;
 }
 
-bool CoVNetworkManager::fetchStates()
+void BrCoVDataManager::handlerReply(QNetworkReply *reply)
 {
-    QMutexLocker lock(mutex);
-    if (reply != nullptr)
-        return false;
-    reply = networkmanager->get(QNetworkRequest(QUrl("https://covid19-brazil-api.now.sh/api/report/v1")));
-    connect(reply, &QIODevice::readyRead, this, &CoVNetworkManager::replyHandler);
-    return true;
-}
-
-void CoVNetworkManager::replyHandler()
-{
-    QMutexLocker lock(mutex);
-    if (reply->isReadable() && reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() == 200)
+    int statuscode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+    if (reply->isReadable() && statuscode == 200)
     {
         QByteArray response = reply->readAll();
-        QJsonDocument json = QJsonDocument::fromJson(response);
-        data->update(json["data"].toArray());
+        emit downloaded();
+        parser->parse(response);
     }
-
-    reply->deleteLater();
-    reply = nullptr;
-}
-
-CoVNetworkThread::CoVNetworkThread(CoVNetworkManager *manager, bool brazilOnly, QObject *parent) : QThread(parent)
-{
-    mgr = manager;
-    brOnly = brazilOnly;
-}
-
-bool CoVNetworkThread::brazil()
-{
-    return brOnly;
-}
-
-bool CoVNetworkThread::success()
-{
-    return result;
-}
-
-void CoVNetworkThread::setBrazil(bool brazilOnly)
-{
-    if (!isRunning())
-        brOnly = brazilOnly;
-}
-
-void CoVNetworkThread::run()
-{
-    if (brOnly)
-        result = mgr->fetchStates();
     else
-        result = mgr->fetchCountries();
+    {
+        emit error(statuscode);
+    }
+    waitingdata = false;
+}
+
+void BrCoVDataManager::handlerParser(QVector<BrCoVDataItem> *data)
+{
+    emit parsed(data);
+}
+
+QVector<BrCoVDataItem> BrCoVDataManager::last()
+{
+    return parser->data();
 }

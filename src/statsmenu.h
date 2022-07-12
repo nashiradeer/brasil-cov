@@ -21,7 +21,7 @@ public:
     bool brazilSelected();
 
 public slots:
-    void data(CoVDataManager *mgr);
+    void data(QVector<BrCoVDataItem> *data);
 
 private:
     Ui::StatsMenu *ui;

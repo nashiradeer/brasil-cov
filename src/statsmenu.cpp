@@ -10,7 +10,7 @@ bool StatsMenu::brazilSelected()
     return ui->brazilRadio->isChecked();
 }
 
-void StatsMenu::data(CoVDataManager *mgr)
+void StatsMenu::data(QVector<BrCoVDataItem> *data)
 {
     QLayoutItem *item;
     while ((item = ui->listArea->takeAt(0)) != NULL)
@@ -19,9 +19,9 @@ void StatsMenu::data(CoVDataManager *mgr)
         delete item;
     }
 
-    for (int i = 0; i < mgr->size(); i++)
+    for (int i = 0; i < data->size(); i++)
     {
-        CoVDataItem datai = mgr->operator[](i);
+        BrCoVDataItem datai = data->operator[](i);
         ui->listArea->addWidget(new StatsItem(datai.name(), datai.suspects(), datai.cases(), datai.deaths()));
     }
 }

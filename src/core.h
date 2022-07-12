@@ -14,16 +14,16 @@
 
 namespace BrasilCoV
 {
-    class CoVDataItem;
-    class CoVDataManager;
-    class CoVNetworkManager;
+    class BrCoVDataItem;
+    class BrCoVDataParser;
+    class BrCoVDataManager;
+    class BrCoVNetworkManager;
 }
 
-class CoVDataItem
+class BrCoVDataItem
 {
 public:
-    static CoVDataItem fromJson(QJsonObject object);
-    explicit CoVDataItem(QString name, quint32 suspects, quint32 cases, quint32 deaths);
+    explicit BrCoVDataItem(QString name, quint32 suspects, quint32 cases, quint32 deaths);
     QString name();
     quint32 suspects();
     quint32 cases();
@@ -36,61 +36,56 @@ private:
     quint32 _deaths;
 };
 
-class CoVDataManager : public QObject
+class BrCoVDataParser : public QThread
 {
     Q_OBJECT
 
 public:
-    explicit CoVDataManager(QObject *parent = nullptr);
-    virtual ~CoVDataManager();
-    void update(QJsonArray json);
-    int size();
-    CoVDataItem operator[](int i);
+    explicit BrCoVDataParser(QObject *parent = nullptr);
+    virtual ~BrCoVDataParser();
+    bool parse(QByteArray arr);
+    QVector<BrCoVDataItem> data();
 
 signals:
-    void updated();
+    void parsed(QVector<BrCoVDataItem> *data);
 
-private:
-    QMutex *mutex;
-    QVector<CoVDataItem> *data;
-};
-
-class CoVNetworkManager : public QObject
-{
-    Q_OBJECT
-
-public:
-    explicit CoVNetworkManager(CoVDataManager *datamanager, QObject *parent = nullptr);
-    virtual ~CoVNetworkManager();
-    bool fetchCountries();
-    bool fetchStates();
-    bool busy();
-
-private slots:
-    void replyHandler();
-
-private:
-    QMutex *mutex;
-    CoVDataManager *data;
-    QNetworkAccessManager *networkmanager;
-    QNetworkReply *reply;
-};
-
-class CoVNetworkThread : public QThread
-{
-    Q_OBJECT
-
-public:
-    explicit CoVNetworkThread(CoVNetworkManager *manager, bool brazilOnly, QObject *parent = nullptr);
-    bool brazil();
-    bool success();
-    void setBrazil(bool brazilOnly);
+protected:
     void run() override;
 
 private:
-    CoVNetworkManager *mgr;
-    bool brOnly;
-    bool result;
+    QMutex *mutex;
+    QByteArray *rawdata;
+    QVector<BrCoVDataItem> *dataparsed;
+};
+
+class BrCoVDataManager : public QObject
+{
+    Q_OBJECT
+
+public:
+    explicit BrCoVDataManager(QObject *parent = nullptr);
+    virtual ~BrCoVDataManager();
+    bool downloading();
+    bool parsing();
+    bool busy();
+    bool fetchStates();
+    bool fetchCountries();
+    bool fetch(QUrl url);
+    QVector<BrCoVDataItem> last();
+
+private slots:
+    void handlerReply(QNetworkReply *reply);
+    void handlerParser(QVector<BrCoVDataItem> *data);
+
+signals:
+    void downloaded();
+    void error(int statuscode);
+    void parsed(QVector<BrCoVDataItem> *data);
+
+private:
+    bool waitingdata;
+    BrCoVDataParser *parser;
+    QNetworkAccessManager *netmgr;
 };
 
 #endif

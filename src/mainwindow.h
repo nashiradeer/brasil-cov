@@ -27,20 +27,16 @@ private slots:
     void openAbout();
     void closeWindow();
     void reloadRequested();
-    void dataReceived();
 
 signals:
     void reload(bool brazilOnly);
-    void data(CoVDataManager *mgr);
 
 private:
     Ui::MainWindow *ui;
-    CoVDataManager *datamgr;
-    CoVNetworkManager *netmgr;
+    BrCoVDataManager *datamgr;
     StatsMenu *statsmenu;
     OptionsWindow *options;
     AboutWindow *about;
-    CoVNetworkThread *netthread;
 };
 
 #endif
