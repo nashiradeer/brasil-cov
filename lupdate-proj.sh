@@ -8,4 +8,4 @@ lupdate \
     src/statsitem.ui src/statsitem.ui \
     src/statsmenu.cpp src/statsmenu.ui \
     -ts \
-    lang/portugues.ts
+    lang/brasilcov_pt.ts

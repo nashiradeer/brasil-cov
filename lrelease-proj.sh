@@ -1,4 +1,4 @@
 #!/bin/bash
 
 lrelease \
-    lang/portugues.ts
+    lang/brasilcov_pt.ts
