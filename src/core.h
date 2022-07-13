@@ -47,7 +47,7 @@ public:
     QVector<BrCoVDataItem> data();
 
 signals:
-    void parsed(QVector<BrCoVDataItem> *data);
+    void parsed();
 
 protected:
     void run() override;
@@ -75,12 +75,11 @@ public:
 
 private slots:
     void handlerReply(QNetworkReply *reply);
-    void handlerParser(QVector<BrCoVDataItem> *data);
 
 signals:
     void downloaded();
     void error(int statuscode);
-    void parsed(QVector<BrCoVDataItem> *data);
+    void parsed();
 
 private:
     bool waitingdata;

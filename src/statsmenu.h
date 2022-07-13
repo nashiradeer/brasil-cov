@@ -24,14 +24,14 @@ signals:
     void fetch();
 
 public slots:
-    void data(QVector<BrCoVDataItem> *data);
+    void data();
 
 private slots:
     void triggerFetch();
     void search(QString text);
 
 private:
-    void updateUi(QVector<BrCoVDataItem> *data, QString search = "");
+    void updateUi(QVector<BrCoVDataItem> data, QString search = "");
     Ui::StatsMenu *ui;
     BrCoVDataManager *dmgr;
 };

@@ -37,8 +37,7 @@ BrCoVDataParser::BrCoVDataParser(QObject *parent) : QThread(parent)
 
 BrCoVDataParser::~BrCoVDataParser()
 {
-    if (rawdata != nullptr)
-        delete rawdata;
+    delete rawdata;
     delete dataparsed;
     delete mutex;
 }
@@ -56,6 +55,7 @@ bool BrCoVDataParser::parse(QByteArray arr)
         return false;
 
     QMutexLocker lock(mutex);
+    delete rawdata;
     rawdata = new QByteArray(arr);
     start();
     return true;
@@ -64,7 +64,7 @@ bool BrCoVDataParser::parse(QByteArray arr)
 void BrCoVDataParser::run()
 {
     QMutexLocker lock(mutex);
-    dataparsed->clear();
+    QVector<BrCoVDataItem>().swap(*dataparsed);
     QJsonDocument json = QJsonDocument::fromJson(*rawdata);
     QJsonArray arr = json["data"].toArray();
     for (int i = 0; i < arr.count(); i++)
@@ -94,7 +94,7 @@ void BrCoVDataParser::run()
         deaths = object["deaths"].toInt();
         dataparsed->append(BrCoVDataItem(name, suspects, cases, deaths));
     }
-    emit parsed(dataparsed);
+    emit parsed();
 }
 
 BrCoVDataManager::BrCoVDataManager(QObject *parent) : QObject(parent)
@@ -102,7 +102,7 @@ BrCoVDataManager::BrCoVDataManager(QObject *parent) : QObject(parent)
     netmgr = new QNetworkAccessManager(this);
     connect(netmgr, &QNetworkAccessManager::finished, this, &BrCoVDataManager::handlerReply);
     parser = new BrCoVDataParser(this);
-    connect(parser, &BrCoVDataParser::parsed, this, &BrCoVDataManager::handlerParser);
+    connect(parser, &BrCoVDataParser::parsed, this, &BrCoVDataManager::parsed);
     waitingdata = false;
 }
 
@@ -162,11 +162,6 @@ void BrCoVDataManager::handlerReply(QNetworkReply *reply)
         emit error(statuscode);
     }
     waitingdata = false;
-}
-
-void BrCoVDataManager::handlerParser(QVector<BrCoVDataItem> *data)
-{
-    emit parsed(data);
 }
 
 QVector<BrCoVDataItem> BrCoVDataManager::last()

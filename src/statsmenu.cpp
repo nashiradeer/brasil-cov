@@ -16,9 +16,9 @@ bool StatsMenu::brazilSelected()
     return ui->brazilRadio->isChecked();
 }
 
-void StatsMenu::data(QVector<BrCoVDataItem> *data)
+void StatsMenu::data()
 {
-    updateUi(data, ui->searchbox->text());
+    updateUi(dmgr->last(), ui->searchbox->text());
 }
 
 void StatsMenu::triggerFetch()
@@ -28,24 +28,25 @@ void StatsMenu::triggerFetch()
 
 void StatsMenu::search(QString text)
 {
-    QVector<BrCoVDataItem> data = dmgr->last();
-    updateUi(&data, text);
+    updateUi(dmgr->last(), text);
 }
 
-void StatsMenu::updateUi(QVector<BrCoVDataItem> *data, QString search)
+void StatsMenu::updateUi(QVector<BrCoVDataItem> data, QString search)
 {
-    QLayoutItem *item;
-    while ((item = ui->listArea->takeAt(0)) != NULL)
+    while (!ui->listArea->layout()->isEmpty())
     {
+        QLayoutItem *item = ui->listArea->layout()->takeAt(0);
+        ui->listArea->layout()->removeItem(item);
         delete item->widget();
+        delete item->layout();
         delete item;
     }
 
-    for (int i = 0; i < data->size(); i++)
+    for (int i = 0; i < data.size(); i++)
     {
-        BrCoVDataItem datai = data->operator[](i);
+        BrCoVDataItem datai = data.operator[](i);
         if (search.isEmpty() || datai.name().toLower().contains(search.toLower()))
-            ui->listArea->addWidget(new StatsItem(datai.name(), datai.suspects(), datai.cases(), datai.deaths()));
+            ui->listArea->layout()->addWidget(new StatsItem(datai.name(), datai.suspects(), datai.cases(), datai.deaths()));
     }
 }
 
