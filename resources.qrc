@@ -1,4 +1,7 @@
 <RCC>
+    <qresource>
+        <file>lang/brasilcov_pt.qm</file>
+    </qresource>
     <qresource prefix="/images">
         <file>icons/brasilcov.svg</file>
         <file>icons/brasilcov.ico</file>
