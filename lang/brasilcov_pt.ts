@@ -115,6 +115,16 @@
         <source>Language</source>
         <translation>Linguagem</translation>
     </message>
+    <message>
+        <location filename="../src/optionswindow.cpp" line="79"/>
+        <source>Portugues</source>
+        <translation>Português</translation>
+    </message>
+    <message>
+        <location filename="../src/optionswindow.cpp" line="81"/>
+        <source>English</source>
+        <translation>Inglês</translation>
+    </message>
 </context>
 <context>
     <name>StatsItem</name>
