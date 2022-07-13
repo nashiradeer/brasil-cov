@@ -8,9 +8,10 @@ For now, the project does not have pre-compiled binaries ready to be downloaded.
 
 ## Building from source
 
-1. Generate the a build path using: ``cmake -B build .``.
-2. Compile the CraftCloud Qt using: ``cmake --build build``.
-3. Your compiled binary is available in ``build/src/brasilcov``.
+1. Release all languages files using ``./lrelease-proj.sh``.
+2. Generate the a build path using: ``cmake -B build .``.
+3. Compile the CraftCloud Qt using: ``cmake --build build``.
+4. Your compiled binary is available in ``build/src/brasilcov``.
 
 ## Credits
 
