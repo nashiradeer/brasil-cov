@@ -7,5 +7,5 @@ lupdate \
     src/optionswindow.ui src/optionswindow.cpp \
     src/statsitem.ui src/statsitem.ui \
     src/statsmenu.cpp src/statsmenu.ui \
-    -ts lang/default.ts \
+    -ts \
     lang/portugues.ts
