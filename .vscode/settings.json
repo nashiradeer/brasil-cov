@@ -14,6 +14,7 @@
         "atomic": "cpp",
         "condition_variable": "cpp",
         "future": "cpp",
-        "new": "cpp"
+        "new": "cpp",
+        "qstandardpaths": "cpp"
     }
 }
