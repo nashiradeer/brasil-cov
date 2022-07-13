@@ -19,6 +19,9 @@ public:
     explicit AboutWindow(QWidget *parent = nullptr);
     virtual ~AboutWindow();
 
+protected slots:
+    virtual void changeEvent(QEvent *event);
+
 private slots:
     void closeWindow();
 

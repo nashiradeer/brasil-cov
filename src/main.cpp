@@ -10,7 +10,7 @@ int main(int argc, char **argv)
     if (myappTranslator.load(QLocale::system(), "brasilcov", "_", ":/lang"))
         app.installTranslator(&myappTranslator);
 
-    MainWindow mainwindow;
+    MainWindow mainwindow(&myappTranslator);
     mainwindow.show();
 
     return app.exec();

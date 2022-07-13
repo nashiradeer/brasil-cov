@@ -14,6 +14,12 @@ AboutWindow::~AboutWindow()
     delete ui;
 }
 
+void AboutWindow::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+        ui->retranslateUi(this);
+}
+
 void AboutWindow::closeWindow()
 {
     close();

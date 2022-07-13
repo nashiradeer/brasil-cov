@@ -11,6 +11,15 @@ StatsMenu::StatsMenu(BrCoVDataManager *datamgr, QWidget *parent) : QWidget(paren
     connect(ui->searchbox, &QLineEdit::textChanged, this, &StatsMenu::search);
 }
 
+void StatsMenu::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+        updateUi(dmgr->last(), ui->searchbox->text());
+    }
+}
+
 bool StatsMenu::brazilSelected()
 {
     return ui->brazilRadio->isChecked();

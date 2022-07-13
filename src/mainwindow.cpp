@@ -1,13 +1,13 @@
 #include "mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow(parent, flags), ui(new Ui::MainWindow)
+MainWindow::MainWindow(QTranslator *translator, QWidget *parent, Qt::WindowFlags flags) : QMainWindow(parent, flags), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
     connect(ui->actionExit, &QAction::triggered, this, &MainWindow::closeWindow);
     connect(ui->actionReload, &QAction::triggered, this, &MainWindow::reloadRequested);
 
-    options = new OptionsWindow();
+    options = new OptionsWindow(translator);
     about = new AboutWindow();
 
     connect(ui->actionOptions, &QAction::triggered, this, &MainWindow::openOptions);
@@ -39,6 +39,12 @@ MainWindow::~MainWindow()
     delete about;
     delete statsmenu;
     delete ui;
+}
+
+void MainWindow::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+        ui->retranslateUi(this);
 }
 
 void MainWindow::reloadRequested()

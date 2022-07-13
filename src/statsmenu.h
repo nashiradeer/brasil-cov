@@ -26,6 +26,9 @@ signals:
 public slots:
     void data();
 
+protected slots:
+    virtual void changeEvent(QEvent *event);
+
 private slots:
     void triggerFetch();
     void search(QString text);
