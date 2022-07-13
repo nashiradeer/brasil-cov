@@ -39,6 +39,17 @@ void OptionsWindow::changeEvent(QEvent *event)
 void OptionsWindow::languageChange(int index)
 {
     transl->load(ui->language->itemData(index).toLocale(), "brasilcov", "_", ":/lang");
+
+    if (QDir().mkpath(QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation)))
+    {
+        QFile flang(QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation) + "/language");
+
+        if (flang.open(QIODevice::WriteOnly))
+        {
+            QTextStream(&flang) << index2lang(index);
+            flang.close();
+        }
+    }
 }
 
 int OptionsWindow::lang2index(QString lang)

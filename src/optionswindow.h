@@ -5,6 +5,11 @@
 #include <QWidget>
 #include <QTranslator>
 #include <QComboBox>
+#include <QFile>
+#include <QDir>
+#include <QStandardPaths>
+#include <QTextStream>
+#include <QIODevice>
 #include <QShortcut>
 #include <QKeySequence>
 
