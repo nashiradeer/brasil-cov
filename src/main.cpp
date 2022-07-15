@@ -23,8 +23,8 @@ int main(int argc, char **argv)
     else
         lang = QLocale::system();
 
-    if (myappTranslator.load(lang, "brasilcov", "_", ":/lang"))
-        app.installTranslator(&myappTranslator);
+    myappTranslator.load(lang, "brasilcov", "_", ":/lang");
+    app.installTranslator(&myappTranslator);
 
     MainWindow mainwindow(&myappTranslator);
     mainwindow.show();
