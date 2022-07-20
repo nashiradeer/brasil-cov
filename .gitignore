@@ -1,3 +1,2 @@
-build/
 *.qm
-*.user
+CMakeLists.txt.user
