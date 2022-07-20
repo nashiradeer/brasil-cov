@@ -26,6 +26,13 @@ int main(int argc, char **argv)
     myappTranslator.load(lang, "brasilcov", "_", ":/lang");
     app.installTranslator(&myappTranslator);
 
+    QFile fcss(":/style/night.css");
+    if (fcss.open(QIODevice::ReadOnly))
+    {
+        app.setStyleSheet(QTextStream(&fcss).readAll());
+        fcss.close();
+    }
+
     MainWindow mainwindow(&myappTranslator);
     mainwindow.show();
 
