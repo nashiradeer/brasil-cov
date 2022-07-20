@@ -22,35 +22,6 @@
     <height>81</height>
    </size>
   </property>
-  <property name="windowTitle">
-   <string>Form</string>
-  </property>
-  <property name="styleSheet">
-   <string notr="true">QWidget#root {
-	border-style: none;
-	border-radius: 5px;
-	border: 1px solid palette(dark);
-	background-color: palette(Base);
-}
-
-QWidget#cases {
-	border-style: none;
-	border-radius: 5px;
-	border: 1px solid palette(dark);
-}
-
-QWidget#suspects {
-	border-style: none;
-	border-radius: 5px;
-	border: 1px solid palette(dark);
-}
-
-QWidget#deaths {
-	border-style: none;
-	border-radius: 5px;
-	border: 1px solid palette(dark);
-}</string>
-  </property>
   <property name="locale">
    <locale language="English" country="UnitedStates"/>
   </property>
@@ -71,7 +42,7 @@ QWidget#deaths {
     <number>0</number>
    </property>
    <item row="0" column="0">
-    <widget class="QWidget" name="root" native="true">
+    <widget class="QWidget" name="itemroot" native="true">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
        <horstretch>0</horstretch>
@@ -83,7 +54,6 @@ QWidget#deaths {
        <widget class="QLabel" name="title">
         <property name="font">
          <font>
-          <weight>75</weight>
           <bold>true</bold>
          </font>
         </property>
@@ -98,14 +68,34 @@ QWidget#deaths {
          <string notr="true"/>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <property name="spacing">
+          <number>5</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
          <item>
           <widget class="QWidget" name="suspects" native="true">
            <layout class="QVBoxLayout" name="verticalLayout_4">
+            <property name="topMargin">
+             <number>5</number>
+            </property>
+            <property name="bottomMargin">
+             <number>5</number>
+            </property>
             <item>
              <widget class="QLabel" name="supectsTitle">
               <property name="font">
                <font>
-                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -130,11 +120,16 @@ QWidget#deaths {
             <string notr="true"/>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_6">
+            <property name="topMargin">
+             <number>5</number>
+            </property>
+            <property name="bottomMargin">
+             <number>5</number>
+            </property>
             <item>
              <widget class="QLabel" name="casesTitle">
               <property name="font">
                <font>
-                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -156,11 +151,16 @@ QWidget#deaths {
          <item>
           <widget class="QWidget" name="deaths" native="true">
            <layout class="QVBoxLayout" name="verticalLayout_5">
+            <property name="topMargin">
+             <number>5</number>
+            </property>
+            <property name="bottomMargin">
+             <number>5</number>
+            </property>
             <item>
              <widget class="QLabel" name="deathsTitle">
               <property name="font">
                <font>
-                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
