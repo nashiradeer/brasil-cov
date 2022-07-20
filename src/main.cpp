@@ -29,12 +29,5 @@ int main(int argc, char **argv)
     MainWindow mainwindow(&myappTranslator);
     mainwindow.show();
 
-    QFile sfile(":/style/night.qss");
-    if (sfile.open(QIODevice::ReadOnly))
-    {
-        app.setStyleSheet(QTextStream(&sfile).readAll());
-        sfile.close();
-    }
-
     return app.exec();
 }

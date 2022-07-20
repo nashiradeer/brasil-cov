@@ -29,9 +29,6 @@
    <iconset resource="../resources.qrc">
     <normaloff>:/images/icons/brasilcov.ico</normaloff>:/images/icons/brasilcov.ico</iconset>
   </property>
-  <property name="styleSheet">
-   <string notr="true"/>
-  </property>
   <property name="locale">
    <locale language="English" country="UnitedStates"/>
   </property>
@@ -67,8 +64,8 @@
     </property>
     <addaction name="actionAbout"/>
    </widget>
-   <addaction name="menuAbout"/>
    <addaction name="menuGeneral"/>
+   <addaction name="menuAbout"/>
   </widget>
   <action name="actionReload">
    <property name="text">

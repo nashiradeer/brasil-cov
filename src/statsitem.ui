@@ -25,6 +25,32 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget#root {
+	border-style: none;
+	border-radius: 5px;
+	border: 1px solid palette(dark);
+	background-color: palette(Base);
+}
+
+QWidget#cases {
+	border-style: none;
+	border-radius: 5px;
+	border: 1px solid palette(dark);
+}
+
+QWidget#suspects {
+	border-style: none;
+	border-radius: 5px;
+	border: 1px solid palette(dark);
+}
+
+QWidget#deaths {
+	border-style: none;
+	border-radius: 5px;
+	border: 1px solid palette(dark);
+}</string>
+  </property>
   <property name="locale">
    <locale language="English" country="UnitedStates"/>
   </property>
