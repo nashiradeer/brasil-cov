@@ -1,5 +1,9 @@
 <RCC>
     <qresource>
+        <file>style/night.qss</file>
+        <file>style/light.qss</file>
+    </qresource>
+    <qresource>
         <file>lang/brasilcov_pt.qm</file>
     </qresource>
     <qresource prefix="/images">
