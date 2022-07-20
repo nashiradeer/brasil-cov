@@ -112,6 +112,9 @@
            <property name="pixmap">
             <pixmap resource="../resources.qrc">:/images/icons/nashiradeer.png</pixmap>
            </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
          <item>
@@ -148,7 +151,6 @@
         <property name="font">
          <font>
           <pointsize>16</pointsize>
-          <weight>75</weight>
           <bold>true</bold>
          </font>
         </property>
