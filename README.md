@@ -8,10 +8,11 @@ For now, the project does not have pre-compiled binaries ready to be downloaded.
 
 ## Building from source
 
-1. Release all languages files using ``./lrelease-proj.sh``.
-2. Generate the a build path using: ``cmake -B build .``.
-3. Compile the CraftCloud Qt using: ``cmake --build build``.
-4. Your compiled binary is available in ``build/src/brasilcov``.
+1. Release all languages files using ``lrelease brasilcov.pro``.
+2. Generate the a build path using: ``qmake brasilcov.pro``.
+3. Compile the Brasil CoV using: ``make``.
+    1. (Windows) If you are using MSVC, use ``nmake`` instead.
+4. Your compiled binary is available in ``build/brasilcov``.
 
 ## Credits
 
