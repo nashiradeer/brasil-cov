@@ -10,7 +10,8 @@ RC_ICONS = icons/brasilcov.ico
 
 QT = gui widgets network
 
-SOURCES += src/main.cpp \
+SOURCES += \
+    src/main.cpp \
     src/core.cpp \
     src/mainwindow.cpp \
     src/aboutwindow.cpp \
@@ -18,14 +19,16 @@ SOURCES += src/main.cpp \
     src/statsitem.cpp \
     src/statsmenu.cpp
 
-HEADERS += src/core.h \
+HEADERS += \
+    src/core.h \
     src/mainwindow.h \
     src/aboutwindow.h \
     src/optionswindow.h \
     src/statsitem.h \
     src/statsmenu.h
 
-FORMS += src/mainwindow.ui \
+FORMS += \
+    src/mainwindow.ui \
     src/aboutwindow.ui \
     src/optionswindow.ui \
     src/statsitem.ui \
