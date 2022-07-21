@@ -1,0 +1,93 @@
+QWidget {
+    background-color: transparent;
+    color: #fff;
+}
+
+QMainWindow, QWidget#AboutWindow, QWidget#OptionsWindow {
+    background-color: #222426;
+}
+
+QMenuBar {
+    background-color: #3c4245;
+    border-bottom: 2px solid #a85cf9;
+}
+
+QMenuBar::item {
+    background-color: #3c4245;
+    padding: 4px 13px;
+    margin-bottom: 1px;
+    border-right: 2px solid #a85cf9;
+    background-color: #222426;
+}
+
+QMenu {
+    background-color: #222426;
+    border: 2px solid #a85cf9;
+}
+
+QMenu::item {
+    padding: 4px 12px;
+    border-radius: 5px;
+}
+
+QScrollArea {
+    border: 2px solid #a85cf9;
+    border-radius: 5px;
+}
+
+QScrollArea > QWidget QWidget {
+    background-color: #3c4245;
+}
+
+QWidget#itemroot {
+    background-color: #222426;
+    border: 2px solid #a85cf9;
+    border-radius: 5px;
+}
+
+QWidget#itemroot > QWidget QWidget {
+    background-color: #3c4245;
+    border-radius: 5px;
+}
+
+QWidget#itemroot > QWidget QWidget QWidget {
+    background-color: #3c4245;
+}
+
+QRadioButton::indicator {
+    width: 16px;
+    height: 16px;
+}
+
+QRadioButton::indicator:unchecked {
+    image: url(:/images/night/checkbox.svg);
+}
+
+QRadioButton::indicator:checked {
+    image: url(:/images/night/checkedbox.svg);
+}
+
+QLineEdit {
+    background-color: #3c4245;
+    border: 2px solid #a85cf9;
+    border-radius: 5px;
+}
+
+QScrollBar:vertical {
+    background-color: #222426;
+    border-left: 2px solid #a85cf9;
+    border-right: 1px solid #a85cf9;
+    width: 12px;
+}
+
+QScrollBar::handle:vertical {
+    background: #a85cf9;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: none;
+}
+
+QLabel#about_title {
+    color: #a85cf9;
+}

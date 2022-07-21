@@ -147,7 +147,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QLabel" name="label_2">
+       <widget class="QLabel" name="about_title">
         <property name="font">
          <font>
           <pointsize>16</pointsize>
@@ -198,13 +198,16 @@
       <item>
        <widget class="QLabel" name="label_5">
         <property name="text">
-         <string>Using the API from [Covid19 Brazil API](https://covid19-brazil-api-docs.vercel.app/).</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Using the API from &lt;a href=&quot;https://covid19-brazil-api-docs.vercel.app/&quot; style=&quot;color: #6fdfdf; text-decoration: none;&quot;&gt;https://covid19-brazil-api-docs.vercel.app/&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="textFormat">
-         <enum>Qt::MarkdownText</enum>
+         <enum>Qt::RichText</enum>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
+        </property>
+        <property name="openExternalLinks">
+         <bool>true</bool>
         </property>
        </widget>
       </item>

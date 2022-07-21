@@ -2,6 +2,8 @@
     <qresource prefix="/">
         <file>lang/brasilcov_pt.qm</file>
         <file>style/night.css</file>
+        <file>images/night/checkbox.svg</file>
+        <file>images/night/checkedbox.svg</file>
     </qresource>
     <qresource prefix="/images">
         <file>icons/brasilcov.svg</file>
