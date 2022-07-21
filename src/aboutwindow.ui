@@ -198,10 +198,10 @@
       <item>
        <widget class="QLabel" name="label_5">
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Using the API from &lt;a href=&quot;https://covid19-brazil-api-docs.vercel.app/&quot; style=&quot;color: #6fdfdf; text-decoration: none;&quot;&gt;https://covid19-brazil-api-docs.vercel.app/&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>Using the API from https://covid19-brazil-api-docs.vercel.app/</string>
         </property>
         <property name="textFormat">
-         <enum>Qt::RichText</enum>
+         <enum>Qt::PlainText</enum>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>

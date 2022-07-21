@@ -1,27 +1,27 @@
 QWidget {
     font-family: 'Noto Sans Display', sans-serif;;
-    color: #fff;
+    color: #000;
 }
 
 QMainWindow, QWidget#AboutWindow, QWidget#OptionsWindow {
-    background-color: #222426;
+    background-color: #fff;
 }
 
 QMenuBar {
-    background-color: #3c4245;
+    background-color: #e2e2e2;
     border-bottom: 2px solid #a85cf9;
 }
 
 QMenuBar::item {
-    background-color: #3c4245;
+    background-color: #e2e2e2;
     padding: 4px 13px;
     margin-bottom: 1px;
     border-right: 2px solid #a85cf9;
-    background-color: #222426;
+    background-color: #fff;
 }
 
 QMenu {
-    background-color: #222426;
+    background-color: #fff;
     border: 2px solid #a85cf9;
 }
 
@@ -36,22 +36,22 @@ QScrollArea {
 }
 
 QScrollArea > QWidget QWidget {
-    background-color: #3c4245;
+    background-color: #e2e2e2;
 }
 
 QWidget#itemroot {
-    background-color: #222426;
+    background-color: #fff;
     border: 2px solid #a85cf9;
     border-radius: 5px;
 }
 
 QWidget#itemroot > QWidget QWidget {
-    background-color: #3c4245;
+    background-color: #e2e2e2;
     border-radius: 5px;
 }
 
 QWidget#itemroot > QWidget QWidget QWidget {
-    background-color: #3c4245;
+    background-color: #e2e2e2;
 }
 
 QRadioButton::indicator {
@@ -60,21 +60,21 @@ QRadioButton::indicator {
 }
 
 QRadioButton::indicator:unchecked {
-    image: url(:/images/night/checkbox.svg);
+    image: url(:/images/light/checkbox.svg);
 }
 
 QRadioButton::indicator:checked {
-    image: url(:/images/night/checkedbox.svg);
+    image: url(:/images/light/checkedbox.svg);
 }
 
 QLineEdit {
-    background-color: #3c4245;
+    background-color: #e2e2e2;
     border: 2px solid #a85cf9;
     border-radius: 5px;
 }
 
 QScrollBar:vertical {
-    background-color: #222426;
+    background-color: #fff;
     border-left: 2px solid #a85cf9;
     border-right: 1px solid #a85cf9;
     width: 12px;
@@ -93,7 +93,7 @@ QLabel#about_title {
 }
 
 QGroupBox {
-    background-color: #3c4245;
+    background-color: #e2e2e2;
     border: 2px solid #a85cf9;
     border-radius: 5px;
     margin-top: 10px;
@@ -106,11 +106,11 @@ QGroupBox::title {
     padding: 2px 5px;
     border: 2px solid #a85cf9;
     border-radius: 5px;
-    background-color: #3c4245;
+    background-color: #e2e2e2;
 }
 
 QComboBox {
-    background-color: #222426;
+    background-color: #fff;
     border: 2px solid #a85cf9;
     padding: 1px 4px;
     border-radius: 5px;
@@ -131,6 +131,6 @@ QComboBox::down-arrow {
 }
 
 QComboBox QAbstractItemView {
-    background-color: #222426;
+    background-color: #fff;
     border: 2px solid #a85cf9;
 }

@@ -4,6 +4,11 @@
         <file>style/night.css</file>
         <file>images/night/checkbox.svg</file>
         <file>images/night/checkedbox.svg</file>
+        <file>images/common/downarrow.svg</file>
+        <file>style/light.css</file>
+        <file>fonts/NotoSansDisplay-Medium.ttf</file>
+        <file>images/light/checkbox.svg</file>
+        <file>images/light/checkedbox.svg</file>
     </qresource>
     <qresource prefix="/images">
         <file>icons/brasilcov.svg</file>
