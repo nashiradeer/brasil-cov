@@ -11,6 +11,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
+#include <QTranslator>
 
 namespace BrasilCoV
 {
@@ -85,6 +86,25 @@ private:
     bool waitingdata;
     BrCoVDataParser *parser;
     QNetworkAccessManager *netmgr;
+};
+
+class BrCoVApplication : public QObject
+{
+    Q_OBJECT
+
+public:
+    explicit BrCoVApplication(QApplication *app, QObject *parent = nullptr);
+    void init();
+    void translate(QString lang);
+    void setTheme(int theme);
+    int getTheme();
+    void updateSystemTheme();
+    bool isSystemLight();
+
+private:
+    QApplication *application;
+    QTranslator translator;
+
 };
 
 #endif
