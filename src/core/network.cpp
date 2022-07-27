@@ -2,22 +2,17 @@
 
 BrCoVNetwork::BrCoVNetwork(QObject *parent) : QObject(parent)
 {
-    waitingdata = false;
-    fwdata = new QFutureWatcher<QVector<BrCoVDataItem>>(this);
-    connect(fwdata, &QFutureWatcher<QVector<BrCoVDataItem>>::finished, this, &BrCoVNetwork::parse);
+    busy = false;
+    data = new QVector<BrCoVDataItem>;
     netmgr = new QNetworkAccessManager(this);
+
     connect(netmgr, &QNetworkAccessManager::finished, this, &BrCoVNetwork::handler);
 }
 
 BrCoVNetwork::~BrCoVNetwork()
 {
-    delete fwdata;
+    delete data;
     delete netmgr;
-}
-
-bool BrCoVNetwork::busy()
-{
-    return waitingdata || fwdata->isFinished();
 }
 
 bool BrCoVNetwork::fetchCountries()
@@ -32,13 +27,14 @@ bool BrCoVNetwork::fetchStates()
 
 bool BrCoVNetwork::fetch(QUrl url)
 {
-    if (busy())
+    if (busy)
         return false;
+    busy = true;
 
-    waitingdata = true;
     QNetworkRequest request(url);
     request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, true);
     netmgr->get(request);
+
     return true;
 }
 
@@ -49,14 +45,57 @@ void BrCoVNetwork::handler(QNetworkReply *reply)
     if (reply->isReadable() && statuscode == 200)
     {
         QByteArray response = reply->readAll();
-        QFuture<QVector<BrCoVDataItem>> fdata = QtConcurrent::run(brcovDataParser, &response);
-        fwdata->setFuture(fdata);
+        parse(response);
+        emit finished();
     }
 
-    waitingdata = false;
+    busy = false;
+    reply->deleteLater();
 }
 
-QVector<BrCoVDataItem> BrCoVNetwork::data()
+QVector<BrCoVDataItem> BrCoVNetwork::result()
 {
-    return fwdata->result();
+    return *data;
+}
+
+bool BrCoVNetwork::isBusy()
+{
+    return busy;
+}
+
+void BrCoVNetwork::parse(QByteArray rawdata)
+{
+    data->clear();
+    data->squeeze();
+
+    QJsonDocument json = QJsonDocument::fromJson(rawdata);
+    QJsonArray arr = json["data"].toArray();
+    for (int i = 0; i < arr.count(); i++)
+    {
+        QJsonObject object = arr[i].toObject();
+        QString name;
+        quint32 cases;
+        quint32 suspects;
+        quint32 deaths;
+        if (object.contains(QString("state")))
+        {
+            name = QString(object["state"].toString());
+            if (object.contains(QString("uf")))
+            {
+                name += " (" + object["uf"].toString() + ")";
+            }
+
+            cases = object["cases"].toInt();
+            suspects = object["suspects"].toInt();
+        }
+        else
+        {
+            name = QString(object["country"].toString());
+            cases = object["confirmed"].toInt();
+            suspects = object["cases"].toInt();
+        }
+        deaths = object["deaths"].toInt();
+        data->append(BrCoVDataItem(name, suspects, cases, deaths));
+        QCoreApplication::processEvents();
+    }
 }

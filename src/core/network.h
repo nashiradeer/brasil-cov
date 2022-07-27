@@ -1,12 +1,16 @@
 #ifndef _BRCOVNETWORK_H_
 #define _BRCOVNETWORK_H_
 
-#include <QFuture>
-#include <QFutureWatcher>
+#include <QByteArray>
+#include <QCoreApplication>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
-#include <QtConcurrent/QtConcurrent>
-#include "dataparser.h"
+#include <QNetworkRequest>
+#include <QUrl>
+#include <QVector>
 #include "dataitem.h"
 
 namespace BrasilCoV {
@@ -20,22 +24,23 @@ class BrCoVNetwork : public QObject
 public:
     explicit BrCoVNetwork(QObject *parent = nullptr);
     virtual ~BrCoVNetwork();
-    bool busy();
     bool fetchStates();
     bool fetchCountries();
-    QVector<BrCoVDataItem> data();
+    bool isBusy();
+    QVector<BrCoVDataItem> result();
 
 private slots:
     void handler(QNetworkReply *reply);
 
 signals:
-    void parse();
+    void finished();
 
 private:
-    bool waitingdata;
-    QFutureWatcher<QVector<BrCoVDataItem>> *fwdata;
+    QVector<BrCoVDataItem> *data;
     QNetworkAccessManager *netmgr;
+    bool busy;
     bool fetch(QUrl url);
+    void parse(QByteArray rawdata);
 };
 
 #endif // _BRCOVNETWORK_H_

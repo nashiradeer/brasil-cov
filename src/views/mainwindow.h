@@ -5,7 +5,7 @@
 #include <QMainWindow>
 #include <QThread>
 #include <QTranslator>
-#include "core.h"
+#include "../core/network.h"
 #include "statsmenu.h"
 #include "optionswindow.h"
 #include "aboutwindow.h"
@@ -30,14 +30,15 @@ private slots:
     void openOptions();
     void openAbout();
     void closeWindow();
-    void reloadRequested();
+    void fetch();
+    void disableWaiting();
 
 signals:
     void reload(bool brazilOnly);
 
 private:
     Ui::MainWindow *ui;
-    BrCoVDataManager *datamgr;
+    BrCoVNetwork *netmgr;
     StatsMenu *statsmenu;
     OptionsWindow *options;
     AboutWindow *about;

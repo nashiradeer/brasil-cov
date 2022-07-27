@@ -1,8 +1,8 @@
 #include "statsmenu.h"
 
-StatsMenu::StatsMenu(BrCoVDataManager *datamgr, QWidget *parent) : QWidget(parent), ui(new Ui::StatsMenu)
+StatsMenu::StatsMenu(BrCoVNetwork *mgr, QWidget *parent) : QWidget(parent), ui(new Ui::StatsMenu)
 {
-    dmgr = datamgr;
+    netmgr = mgr;
 
     ui->setupUi(this);
 
@@ -16,7 +16,7 @@ void StatsMenu::changeEvent(QEvent *event)
     if (event->type() == QEvent::LanguageChange)
     {
         ui->retranslateUi(this);
-        updateUi(dmgr->last(), ui->searchbox->text());
+        updateUi(netmgr->result(), ui->searchbox->text());
     }
 }
 
@@ -27,7 +27,7 @@ bool StatsMenu::brazilSelected()
 
 void StatsMenu::data()
 {
-    updateUi(dmgr->last(), ui->searchbox->text());
+    updateUi(netmgr->result(), ui->searchbox->text());
 }
 
 void StatsMenu::triggerFetch()
@@ -37,7 +37,7 @@ void StatsMenu::triggerFetch()
 
 void StatsMenu::search(QString text)
 {
-    updateUi(dmgr->last(), text);
+    updateUi(netmgr->result(), text);
 }
 
 void StatsMenu::updateUi(QVector<BrCoVDataItem> data, QString search)
@@ -56,7 +56,10 @@ void StatsMenu::updateUi(QVector<BrCoVDataItem> data, QString search)
         BrCoVDataItem datai = data.operator[](i);
         if (search.isEmpty() || datai.name().toLower().contains(search.toLower()))
             ui->listArea->layout()->addWidget(new StatsItem(datai.name(), datai.suspects(), datai.cases(), datai.deaths()));
+        QCoreApplication::processEvents();
     }
+
+    emit loaded();
 }
 
 StatsMenu::~StatsMenu()
