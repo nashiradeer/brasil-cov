@@ -11,27 +11,33 @@ RC_ICONS = icons/brasilcov.ico
 QT = gui widgets network
 
 SOURCES += \
+    src/core/application.cpp \
+    src/core/dataitem.cpp \
+    src/core/dataparser.cpp \
+    src/core/network.cpp \
     src/main.cpp \
-    src/core.cpp \
-    src/mainwindow.cpp \
-    src/aboutwindow.cpp \
-    src/optionswindow.cpp \
-    src/statsitem.cpp \
-    src/statsmenu.cpp
+    src/views/mainwindow.cpp \
+    src/views/aboutwindow.cpp \
+    src/views/optionswindow.cpp \
+    src/views/statsitem.cpp \
+    src/views/statsmenu.cpp
 
 HEADERS += \
-    src/core.h \
-    src/mainwindow.h \
-    src/aboutwindow.h \
-    src/optionswindow.h \
-    src/statsitem.h \
-    src/statsmenu.h
+    src/core/application.h \
+    src/core/dataitem.h \
+    src/core/dataparser.h \
+    src/core/network.h \
+    src/views/mainwindow.h \
+    src/views/aboutwindow.h \
+    src/views/optionswindow.h \
+    src/views/statsitem.h \
+    src/views/statsmenu.h
 
 FORMS += \
-    src/mainwindow.ui \
-    src/aboutwindow.ui \
-    src/optionswindow.ui \
-    src/statsitem.ui \
-    src/statsmenu.ui
+    src/uis/mainwindow.ui \
+    src/uis/aboutwindow.ui \
+    src/uis/optionswindow.ui \
+    src/uis/statsitem.ui \
+    src/uis/statsmenu.ui
 
 TRANSLATIONS += lang/brasilcov_pt.ts

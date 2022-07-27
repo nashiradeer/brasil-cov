@@ -16,7 +16,7 @@ int main(int argc, char **argv)
     QTranslator myappTranslator;
     QLocale lang;
 
-    QFile flang(QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation) + "/language");
+    QFile flang();
 
     if (flang.open(QIODevice::ReadOnly))
     {
@@ -29,7 +29,7 @@ int main(int argc, char **argv)
     myappTranslator.load(lang, "brasilcov", "_", ":/lang");
     app.installTranslator(&myappTranslator);
 
-    QFile fcss(":/style/light.css");
+    QFile fcss(":/style/night.css");
     if (fcss.open(QIODevice::ReadOnly))
     {
         app.setStyleSheet(QTextStream(&fcss).readAll());
