@@ -112,6 +112,9 @@
            <property name="pixmap">
             <pixmap resource="../resources.qrc">:/images/icons/nashiradeer.png</pixmap>
            </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
          <item>
@@ -144,11 +147,10 @@
        </spacer>
       </item>
       <item>
-       <widget class="QLabel" name="label_2">
+       <widget class="QLabel" name="about_title">
         <property name="font">
          <font>
           <pointsize>16</pointsize>
-          <weight>75</weight>
           <bold>true</bold>
          </font>
         </property>
@@ -196,13 +198,16 @@
       <item>
        <widget class="QLabel" name="label_5">
         <property name="text">
-         <string>Using the API from [Covid19 Brazil API](https://covid19-brazil-api-docs.vercel.app/).</string>
+         <string>Using the API from https://covid19-brazil-api-docs.vercel.app/</string>
         </property>
         <property name="textFormat">
-         <enum>Qt::MarkdownText</enum>
+         <enum>Qt::PlainText</enum>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
+        </property>
+        <property name="openExternalLinks">
+         <bool>true</bool>
         </property>
        </widget>
       </item>

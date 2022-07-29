@@ -84,11 +84,17 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>382</width>
-        <height>214</height>
+        <width>372</width>
+        <height>198</height>
        </rect>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_2"/>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <layout class="QVBoxLayout"/>
      </widget>
     </widget>
    </item>

@@ -61,5 +61,14 @@ void StatsMenu::updateUi(QVector<BrCoVDataItem> data, QString search)
 
 StatsMenu::~StatsMenu()
 {
+    while (!ui->listArea->layout()->isEmpty())
+    {
+        QLayoutItem *item = ui->listArea->layout()->takeAt(0);
+        ui->listArea->layout()->removeItem(item);
+        delete item->widget();
+        delete item->layout();
+        delete item;
+    }
+
     delete ui;
 }

@@ -1,0 +1,136 @@
+QWidget {
+    font-family: 'Noto Sans Display', sans-serif;;
+    color: #fff;
+}
+
+QMainWindow, QWidget#AboutWindow, QWidget#OptionsWindow {
+    background-color: #222426;
+}
+
+QMenuBar {
+    background-color: #3c4245;
+    border-bottom: 2px solid #a85cf9;
+}
+
+QMenuBar::item {
+    background-color: #3c4245;
+    padding: 4px 13px;
+    margin-bottom: 1px;
+    border-right: 2px solid #a85cf9;
+    background-color: #222426;
+}
+
+QMenu {
+    background-color: #222426;
+    border: 2px solid #a85cf9;
+}
+
+QMenu::item {
+    padding: 4px 12px;
+    border-radius: 5px;
+}
+
+QScrollArea {
+    border: 2px solid #a85cf9;
+    border-radius: 5px;
+}
+
+QScrollArea > QWidget QWidget {
+    background-color: #3c4245;
+}
+
+QWidget#itemroot {
+    background-color: #222426;
+    border: 2px solid #a85cf9;
+    border-radius: 5px;
+}
+
+QWidget#itemroot > QWidget QWidget {
+    background-color: #3c4245;
+    border-radius: 5px;
+}
+
+QWidget#itemroot > QWidget QWidget QWidget {
+    background-color: #3c4245;
+}
+
+QRadioButton::indicator {
+    width: 16px;
+    height: 16px;
+}
+
+QRadioButton::indicator:unchecked {
+    image: url(:/images/night/checkbox.svg);
+}
+
+QRadioButton::indicator:checked {
+    image: url(:/images/night/checkedbox.svg);
+}
+
+QLineEdit {
+    background-color: #3c4245;
+    border: 2px solid #a85cf9;
+    border-radius: 5px;
+}
+
+QScrollBar:vertical {
+    background-color: #222426;
+    border-left: 2px solid #a85cf9;
+    border-right: 1px solid #a85cf9;
+    width: 12px;
+}
+
+QScrollBar::handle:vertical {
+    background: #a85cf9;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: none;
+}
+
+QLabel#about_title {
+    color: #a85cf9;
+}
+
+QGroupBox {
+    background-color: #3c4245;
+    border: 2px solid #a85cf9;
+    border-radius: 5px;
+    margin-top: 10px;
+    padding-top: 5px;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top center;
+    padding: 2px 5px;
+    border: 2px solid #a85cf9;
+    border-radius: 5px;
+    background-color: #3c4245;
+}
+
+QComboBox {
+    background-color: #222426;
+    border: 2px solid #a85cf9;
+    padding: 1px 4px;
+    border-radius: 5px;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 15px;
+    border-left: 2px solid #a85cf9;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+QComboBox::down-arrow {
+    width: 15px;
+    image: url(:/images/common/downarrow.svg);
+}
+
+QComboBox QAbstractItemView {
+    background-color: #222426;
+    border: 2px solid #a85cf9;
+}
