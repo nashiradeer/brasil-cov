@@ -5,7 +5,7 @@ MainWindow::MainWindow(QTranslator *translator, QWidget *parent, Qt::WindowFlags
     ui->setupUi(this);
 
     connect(ui->actionExit, &QAction::triggered, this, &MainWindow::closeWindow);
-    connect(ui->actionReload, &QAction::triggered, this, &MainWindow::reloadRequested);
+    connect(ui->actionReload, &QAction::triggered, this, &MainWindow::fetch);
 
     options = new OptionsWindow(translator);
     about = new AboutWindow();
@@ -13,28 +13,22 @@ MainWindow::MainWindow(QTranslator *translator, QWidget *parent, Qt::WindowFlags
     connect(ui->actionOptions, &QAction::triggered, this, &MainWindow::openOptions);
     connect(ui->actionAbout, &QAction::triggered, this, &MainWindow::openAbout);
 
-    datamgr = new BrCoVDataManager(this);
+    netmgr = new BrCoVNetwork(this);
 
-    statsmenu = new StatsMenu(datamgr);
+    statsmenu = new StatsMenu(netmgr);
 
     ui->main->addWidget(statsmenu);
 
-    connect(datamgr, &BrCoVDataManager::parsed, statsmenu, &StatsMenu::data);
-    connect(statsmenu, &StatsMenu::fetch, this, &MainWindow::reloadRequested);
+    connect(netmgr, &BrCoVNetwork::finished, statsmenu, &StatsMenu::data);
+    connect(statsmenu, &StatsMenu::loaded, this, &MainWindow::disableWaiting);
+    connect(statsmenu, &StatsMenu::fetch, this, &MainWindow::fetch);
 
-    if (statsmenu->brazilSelected())
-    {
-        datamgr->fetchStates();
-    }
-    else
-    {
-        datamgr->fetchCountries();
-    }
+    fetch();
 }
 
 MainWindow::~MainWindow()
 {
-    delete datamgr;
+    delete netmgr;
     delete options;
     delete about;
     delete statsmenu;
@@ -47,21 +41,23 @@ void MainWindow::changeEvent(QEvent *event)
         ui->retranslateUi(this);
 }
 
-void MainWindow::reloadRequested()
+void MainWindow::fetch()
 {
+    this->setCursor(Qt::WaitCursor);
     if (statsmenu->brazilSelected())
-    {
-        datamgr->fetchStates();
-    }
+        netmgr->fetchStates();
     else
-    {
-        datamgr->fetchCountries();
-    }
+        netmgr->fetchCountries();
 }
 
 void MainWindow::openOptions()
 {
     options->show();
+}
+
+void MainWindow::disableWaiting()
+{
+    this->setCursor(Qt::ArrowCursor);
 }
 
 void MainWindow::openAbout()

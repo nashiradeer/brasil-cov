@@ -3,7 +3,7 @@
 
 #include "ui_statsmenu.h"
 #include <QWidget>
-#include "core.h"
+#include "../core/network.h"
 #include "statsitem.h"
 
 namespace BrasilCoV
@@ -16,12 +16,13 @@ class StatsMenu : public QWidget
     Q_OBJECT
 
 public:
-    explicit StatsMenu(BrCoVDataManager *datamgr, QWidget *parent = nullptr);
+    explicit StatsMenu(BrCoVNetwork *netmgr, QWidget *parent = nullptr);
     virtual ~StatsMenu();
     bool brazilSelected();
 
 signals:
     void fetch();
+    void loaded();
 
 public slots:
     void data();
@@ -36,7 +37,7 @@ private slots:
 private:
     void updateUi(QVector<BrCoVDataItem> data, QString search = "");
     Ui::StatsMenu *ui;
-    BrCoVDataManager *dmgr;
+    BrCoVNetwork *netmgr;
 };
 
 #endif

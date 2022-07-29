@@ -1,21 +1,33 @@
 <RCC>
-    <qresource prefix="/">
-        <file>lang/brasilcov_pt.qm</file>
-        <file>style/night.css</file>
-        <file>images/night/checkbox.svg</file>
-        <file>images/night/checkedbox.svg</file>
-        <file>images/common/downarrow.svg</file>
-        <file>style/light.css</file>
-        <file>fonts/NotoSansDisplay-Medium.ttf</file>
-        <file>images/light/checkbox.svg</file>
-        <file>images/light/checkedbox.svg</file>
+    <qresource>
+        <!-- Fonts -->
+        <file>assets/fonts/NotoSansDisplay-Medium.ttf</file>
+
+        <!-- Icons -->
+        <file>assets/images/icons/brasilcov.svg</file>
+        <file>assets/images/icons/brasilcov.ico</file>
+        <file>assets/images/icons/brasilcov16.png</file>
+        <file>assets/images/icons/brasilcov32.png</file>
+        <file>assets/images/icons/brasilcov256.png</file>
+        <file>assets/images/icons/nashiradeer.png</file>
+
+        <!-- Common -->
+        <file>assets/images/common/downarrow.svg</file>
+
+        <!-- Light theme -->
+        <file>assets/images/light/checkbox.svg</file>
+        <file>assets/images/light/checkedbox.svg</file>
+
+        <!-- Night theme -->
+        <file>assets/images/night/checkbox.svg</file>
+        <file>assets/images/night/checkedbox.svg</file>
+
+        <!-- Stylesheet -->
+        <file>assets/style/night.css</file>
+        <file>assets/style/light.css</file>
     </qresource>
-    <qresource prefix="/images">
-        <file>icons/brasilcov.svg</file>
-        <file>icons/brasilcov.ico</file>
-        <file>icons/brasilcov16.png</file>
-        <file>icons/brasilcov32.png</file>
-        <file>icons/brasilcov256.png</file>
-        <file>icons/nashiradeer.png</file>
+    <qresource prefix="assets">
+        <!-- Translations -->
+        <file>lang/brasilcov_pt.qm</file>
     </qresource>
 </RCC>
