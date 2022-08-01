@@ -5,7 +5,7 @@
 #include <QTextStream>
 #include <QIODevice>
 #include <QFontDatabase>
-#include "mainwindow.h"
+#include "views/mainwindow.h"
 
 int main(int argc, char **argv)
 {
@@ -16,7 +16,7 @@ int main(int argc, char **argv)
     QTranslator myappTranslator;
     QLocale lang;
 
-    QFile flang(QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation) + "/language");
+    QFile flang;
 
     if (flang.open(QIODevice::ReadOnly))
     {
