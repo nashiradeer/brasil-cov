@@ -1,8 +1,12 @@
 #ifndef _BRCOVAPPLICATION_H_
 #define _BRCOVAPPLICATION_H_
 
+#include <QApplication>
+#include <QFile>
+#include <QtGlobal>
 #include <QSettings>
 #include <QStandardPaths>
+#include <QTextStream>
 #include <QTranslator>
 
 namespace BrasilCoV {
@@ -18,20 +22,21 @@ public:
     const static int DarkTheme = 1;
     const static int LightTheme = 2;
     explicit BrCoVApplication(QApplication *app, QObject *parent = nullptr);
-    void translate(QString lang);
-    void setTheme(int theme);
+    virtual ~BrCoVApplication();
+    void translate(QLocale lang);
+    QLocale getLocale();
     int getTheme();
-    void updateSystemTheme();
+    void setTheme(int theme);
     bool isSystemLight();
-    bool saveSettings();
-    bool loadSettings();
+    void saveSettings();
+    void loadSettings();
 
 private:
+    int currentTheme;
+    QLocale locale;
     QApplication *application;
-    QSettings settings;
-    QTranslator translator;
+    QTranslator *translator;
     void updateTheme(int theme);
-
 };
 
 #endif // _BRCOVAPPLICATION_H_
