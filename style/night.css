@@ -60,11 +60,11 @@ QRadioButton::indicator {
 }
 
 QRadioButton::indicator:unchecked {
-    image: url(:/images/night/checkbox.svg);
+    image: url(:/assets/images/night/checkbox.svg);
 }
 
 QRadioButton::indicator:checked {
-    image: url(:/images/night/checkedbox.svg);
+    image: url(:/assets/images/night/checkedbox.svg);
 }
 
 QLineEdit {
@@ -127,7 +127,7 @@ QComboBox::drop-down {
 
 QComboBox::down-arrow {
     width: 15px;
-    image: url(:/images/common/downarrow.svg);
+    image: url(:/assets/images/common/downarrow.svg);
 }
 
 QComboBox QAbstractItemView {

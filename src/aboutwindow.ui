@@ -35,7 +35,7 @@
    <string>Brasil CoV - About</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../resources.qrc">
+   <iconset>
     <normaloff>:/images/icons/brasilcov.ico</normaloff>:/images/icons/brasilcov.ico</iconset>
   </property>
   <property name="locale">
@@ -110,7 +110,7 @@
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap resource="../resources.qrc">:/images/icons/nashiradeer.png</pixmap>
+            <pixmap resource="../../resources.qrc">:/assets/images/icons/nashiradeer.png</pixmap>
            </property>
            <property name="scaledContents">
             <bool>true</bool>
@@ -243,7 +243,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../resources.qrc"/>
+  <include location="../../resources.qrc"/>
  </resources>
  <connections/>
 </ui>
