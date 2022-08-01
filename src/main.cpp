@@ -11,7 +11,7 @@ int main(int argc, char **argv)
 {
     QApplication app(argc, argv);
 
-    QFontDatabase::addApplicationFont(":/fonts/NotoSansDisplay-Medium.ttf");
+    QFontDatabase::addApplicationFont(":/assets/fonts/NotoSansDisplay-Medium.ttf");
 
     QTranslator myappTranslator;
     QLocale lang;
@@ -26,10 +26,10 @@ int main(int argc, char **argv)
     else
         lang = QLocale::system();
 
-    myappTranslator.load(lang, "brasilcov", "_", ":/lang");
+    myappTranslator.load(lang, "brasilcov", "_", ":/assets/lang");
     app.installTranslator(&myappTranslator);
 
-    QFile fcss(":/style/night.css");
+    QFile fcss(":/assets/style/night.css");
     if (fcss.open(QIODevice::ReadOnly))
     {
         app.setStyleSheet(QTextStream(&fcss).readAll());
