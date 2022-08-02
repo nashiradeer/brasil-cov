@@ -1,13 +1,13 @@
 #include "mainwindow.h"
 
-MainWindow::MainWindow(QTranslator *translator, QWidget *parent, Qt::WindowFlags flags) : QMainWindow(parent, flags), ui(new Ui::MainWindow)
+MainWindow::MainWindow(BrCoVApplication *app, QWidget *parent, Qt::WindowFlags flags) : QMainWindow(parent, flags), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
     connect(ui->actionExit, &QAction::triggered, this, &MainWindow::closeWindow);
     connect(ui->actionReload, &QAction::triggered, this, &MainWindow::fetch);
 
-    options = new OptionsWindow(translator);
+    options = new OptionsWindow(app);
     about = new AboutWindow();
 
     connect(ui->actionOptions, &QAction::triggered, this, &MainWindow::openOptions);

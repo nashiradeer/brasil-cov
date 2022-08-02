@@ -5,6 +5,7 @@
 #include <QMainWindow>
 #include <QThread>
 #include <QTranslator>
+#include "../core/application.h"
 #include "../core/network.h"
 #include "statsmenu.h"
 #include "optionswindow.h"
@@ -20,7 +21,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QTranslator *translator, QWidget *parent = nullptr, Qt::WindowFlags flags = Qt::WindowFlags());
+    explicit MainWindow(BrCoVApplication *app, QWidget *parent = nullptr, Qt::WindowFlags flags = Qt::WindowFlags());
     virtual ~MainWindow();
 
 protected slots:

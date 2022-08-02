@@ -3,15 +3,10 @@
 
 #include "ui_optionswindow.h"
 #include <QWidget>
-#include <QTranslator>
 #include <QComboBox>
-#include <QFile>
-#include <QDir>
-#include <QStandardPaths>
-#include <QTextStream>
-#include <QIODevice>
 #include <QShortcut>
 #include <QKeySequence>
+#include "../core/application.h"
 
 namespace BrasilCoV
 {
@@ -23,7 +18,7 @@ class OptionsWindow : public QWidget
     Q_OBJECT
 
 public:
-    explicit OptionsWindow(QTranslator *translator, QWidget *parent = nullptr);
+    explicit OptionsWindow(BrCoVApplication *app, QWidget *parent = nullptr);
     virtual ~OptionsWindow();
 
 protected slots:
@@ -36,10 +31,13 @@ private slots:
 private:
     Ui::OptionsWindow *ui;
     QShortcut *shortcut;
-    QTranslator *transl;
-    int lang2index(QString lang);
-    QString index2lang(int index);
-    QString index2translate(int index);
+    BrCoVApplication *application;
+    QLocale langIndex(int index);
+    void updateLangIndex();
+    void updateThemeSelection();
+    void selectSystemTheme();
+    void selectDarkTheme();
+    void selectLightTheme();
 };
 
 #endif

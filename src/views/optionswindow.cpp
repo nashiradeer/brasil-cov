@@ -1,8 +1,8 @@
 #include "optionswindow.h"
 
-OptionsWindow::OptionsWindow(QTranslator *translator, QWidget *parent) : QWidget(parent), ui(new Ui::OptionsWindow)
+OptionsWindow::OptionsWindow(BrCoVApplication *app, QWidget *parent) : QWidget(parent), ui(new Ui::OptionsWindow)
 {
-    transl = translator;
+    application = app;
 
     ui->setupUi(this);
 
@@ -10,11 +10,19 @@ OptionsWindow::OptionsWindow(QTranslator *translator, QWidget *parent) : QWidget
     connect(shortcut, &QShortcut::activated, this, &OptionsWindow::closeWindow);
 
     for (int i = 0; i <= 1; i++)
-        ui->language->addItem(index2translate(i), QLocale(index2lang(i)));
+    {
+        QLocale locale = langIndex(i);
+        ui->language->addItem(QLocale::languageToString(locale.language()), locale);
+    }
 
-    ui->language->setCurrentIndex(lang2index(translator->language()));
+    updateLangIndex();
+    updateThemeSelection();
 
     connect(ui->language, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &OptionsWindow::languageChange);
+
+    connect(ui->systemTheme, &QRadioButton::clicked, this, &OptionsWindow::selectSystemTheme);
+    connect(ui->nighTheme, &QRadioButton::clicked, this, &OptionsWindow::selectDarkTheme);
+    connect(ui->lightTheme, &QRadioButton::clicked, this, &OptionsWindow::selectLightTheme);
 }
 
 OptionsWindow::~OptionsWindow()
@@ -28,58 +36,75 @@ void OptionsWindow::changeEvent(QEvent *event)
     if (event->type() == QEvent::LanguageChange)
     {
         ui->retranslateUi(this);
-
-        for (int i = 0; i < ui->language->count(); i++)
-            ui->language->setItemText(i, index2translate(i));
-
-        ui->language->setCurrentIndex(lang2index(transl->language()));
+        updateLangIndex();
     }
+}
+
+void OptionsWindow::updateLangIndex()
+{
+    for (int i = 0; i < ui->language->count(); i++)
+    {
+        if (ui->language->itemData(i).toLocale().language() == application->getLocale().language())
+        {
+            ui->language->setCurrentIndex(i);
+            return;
+        }
+    }
+
+    ui->language->setCurrentIndex(0);
 }
 
 void OptionsWindow::languageChange(int index)
 {
-    transl->load(ui->language->itemData(index).toLocale(), "brasilcov", "_", ":/lang");
-
-    if (QDir().mkpath(QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation)))
-    {
-        QFile flang(QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation) + "/language");
-
-        if (flang.open(QIODevice::WriteOnly))
-        {
-            QTextStream(&flang) << index2lang(index);
-            flang.close();
-        }
-    }
+    application->translate(langIndex(index));
+    application->saveSettings();
 }
 
-int OptionsWindow::lang2index(QString lang)
-{
-    if (lang.startsWith("pt"))
-        return 1;
-    else
-        return 0;
-}
-
-QString OptionsWindow::index2lang(int index)
+QLocale OptionsWindow::langIndex(int index)
 {
     switch (index)
     {
     case 1:
-        return "pt";
+        return QLocale::Portuguese;
     default:
-        return "en";
+        return QLocale::English;
     }
 }
 
-QString OptionsWindow::index2translate(int index)
+void OptionsWindow::updateThemeSelection()
 {
-    switch (index)
+    int theme = application->getTheme();
+
+    switch (theme)
     {
-    case 1:
-        return tr("Portugues");
+    case BrCoVApplication::DarkTheme:
+        ui->nighTheme->setChecked(true);
+        break;
+    case BrCoVApplication::LightTheme:
+        ui->lightTheme->setChecked(true);
+        break;
     default:
-        return tr("English");
+        ui->systemTheme->setChecked(true);
+        break;
     }
+}
+
+void OptionsWindow::selectSystemTheme()
+{
+    application->setTheme(BrCoVApplication::SystemTheme);
+    application->saveSettings();
+}
+
+void OptionsWindow::selectDarkTheme()
+{
+    application->setTheme(BrCoVApplication::DarkTheme);
+    application->saveSettings();
+}
+
+void OptionsWindow::selectLightTheme()
+{
+    application->setTheme(BrCoVApplication::LightTheme);
+    application->saveSettings();
 }
 
 void OptionsWindow::closeWindow()

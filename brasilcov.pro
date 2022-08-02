@@ -11,7 +11,7 @@ RC_ICONS = icons/brasilcov.ico
 QT = gui widgets network
 
 SOURCES += \
-#    src/core/application.cpp \
+    src/core/application.cpp \
     src/core/dataitem.cpp \
     src/core/network.cpp \
     src/main.cpp \
@@ -22,7 +22,7 @@ SOURCES += \
     src/views/statsmenu.cpp
 
 HEADERS += \
-#    src/core/application.h \
+    src/core/application.h \
     src/core/dataitem.h \
     src/core/network.h \
     src/views/mainwindow.h \
