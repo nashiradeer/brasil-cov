@@ -51,9 +51,10 @@ void BrCoVApplication::setTheme(int theme)
 
 bool BrCoVApplication::isSystemLight()
 {
-#ifdef Q_OS_WIN
+#if defined(Q_OS_WIN)
     QSettings winreg("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", QSettings::NativeFormat);
     return winreg.value("AppsUseLightTheme", 0) != 0;
+#elif defined(Q_OS_LINUX)
 #else
     return false;
 #endif
