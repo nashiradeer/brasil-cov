@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>313</width>
-    <height>81</height>
+    <height>103</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
@@ -19,14 +19,20 @@
   <property name="minimumSize">
    <size>
     <width>229</width>
-    <height>81</height>
+    <height>100</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>16777215</width>
-    <height>81</height>
+    <height>120</height>
    </size>
+  </property>
+  <property name="font">
+   <font>
+    <family>Noto Sans Display</family>
+    <pointsize>11</pointsize>
+   </font>
   </property>
   <property name="locale">
    <locale language="English" country="UnitedStates"/>
@@ -55,11 +61,25 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans Display</family>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
        <widget class="QLabel" name="title">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="font">
          <font>
+          <family>Noto Sans Display</family>
+          <pointsize>11</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -70,6 +90,12 @@
       </item>
       <item>
        <widget class="QWidget" name="widget" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="styleSheet">
          <string notr="true"/>
         </property>
@@ -91,7 +117,16 @@
          </property>
          <item>
           <widget class="QWidget" name="suspects" native="true">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <layout class="QVBoxLayout" name="verticalLayout_4">
+            <property name="spacing">
+             <number>0</number>
+            </property>
             <property name="topMargin">
              <number>5</number>
             </property>
@@ -100,8 +135,16 @@
             </property>
             <item>
              <widget class="QLabel" name="supectsTitle">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="font">
                <font>
+                <family>Noto Sans Display</family>
+                <pointsize>11</pointsize>
                 <bold>true</bold>
                </font>
               </property>
@@ -112,6 +155,12 @@
             </item>
             <item>
              <widget class="QLabel" name="supectsValue">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
                <string>0000000</string>
               </property>
@@ -122,10 +171,19 @@
          </item>
          <item>
           <widget class="QWidget" name="cases" native="true">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="styleSheet">
             <string notr="true"/>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_6">
+            <property name="spacing">
+             <number>0</number>
+            </property>
             <property name="topMargin">
              <number>5</number>
             </property>
@@ -134,8 +192,16 @@
             </property>
             <item>
              <widget class="QLabel" name="casesTitle">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="font">
                <font>
+                <family>Noto Sans Display</family>
+                <pointsize>11</pointsize>
                 <bold>true</bold>
                </font>
               </property>
@@ -146,6 +212,12 @@
             </item>
             <item>
              <widget class="QLabel" name="casesValue">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
                <string>0000000</string>
               </property>
@@ -156,7 +228,16 @@
          </item>
          <item>
           <widget class="QWidget" name="deaths" native="true">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <layout class="QVBoxLayout" name="verticalLayout_5">
+            <property name="spacing">
+             <number>1</number>
+            </property>
             <property name="topMargin">
              <number>5</number>
             </property>
@@ -165,8 +246,16 @@
             </property>
             <item>
              <widget class="QLabel" name="deathsTitle">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="font">
                <font>
+                <family>Noto Sans Display</family>
+                <pointsize>11</pointsize>
                 <bold>true</bold>
                </font>
               </property>
@@ -177,6 +266,12 @@
             </item>
             <item>
              <widget class="QLabel" name="deathsValue">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
                <string>0000000</string>
               </property>
