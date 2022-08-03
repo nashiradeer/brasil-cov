@@ -1,5 +1,6 @@
-QWidget {
-    font-family: 'Noto Sans Display', sans-serif;;
+* {
+    font-family: 'Noto Sans Display', sans-serif;
+    font-size: 11pt;
     color: #fff;
 }
 
@@ -89,6 +90,7 @@ QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical, QScrollBar::add-pa
 }
 
 QLabel#about_title {
+    font-size: 30pt;
     color: #a85cf9;
 }
 
@@ -97,13 +99,13 @@ QGroupBox {
     border: 2px solid #a85cf9;
     border-radius: 5px;
     margin-top: 10px;
-    padding-top: 5px;
+    padding-top: 15px;
 }
 
 QGroupBox::title {
     subcontrol-origin: margin;
     subcontrol-position: top center;
-    padding: 2px 5px;
+    padding: 0px 5px;
     border: 2px solid #a85cf9;
     border-radius: 5px;
     background-color: #3c4245;
