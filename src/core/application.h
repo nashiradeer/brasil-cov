@@ -9,6 +9,13 @@
 #include <QTextStream>
 #include <QTranslator>
 
+#ifdef Q_OS_LINUX
+#include <QtDBus/QDBusArgument>
+#include <QtDBus/QDBusInterface>
+#include <QtDBus/QDBusMessage>
+#include <QtDBus/QDBusVariant>
+#endif
+
 namespace BrasilCoV {
     class BrCoVApplication;
 }

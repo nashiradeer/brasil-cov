@@ -10,6 +10,10 @@ RC_ICONS = icons/brasilcov.ico
 
 QT = gui widgets network
 
+linux {
+    QT += dbus
+}
+
 SOURCES += \
     src/core/application.cpp \
     src/core/dataitem.cpp \

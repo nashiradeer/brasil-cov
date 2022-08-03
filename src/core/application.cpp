@@ -51,9 +51,13 @@ void BrCoVApplication::setTheme(int theme)
 
 bool BrCoVApplication::isSystemLight()
 {
-#ifdef Q_OS_WIN
+#if defined(Q_OS_WIN)
     QSettings winreg("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", QSettings::NativeFormat);
     return winreg.value("AppsUseLightTheme", 0) != 0;
+#elif defined(Q_OS_LINUX)
+    QDBusInterface dbus("org.freedesktop.portal.Desktop", "/org/freedesktop/portal/desktop", "org.freedesktop.portal.Settings");
+    QDBusMessage dbusmsg = dbus.call("Read", "org.freedesktop.appearance", "color-scheme");
+    return dbusmsg.arguments()[0].value<QDBusVariant>().variant().value<QDBusVariant>().variant().toUInt() != 1;
 #else
     return false;
 #endif
